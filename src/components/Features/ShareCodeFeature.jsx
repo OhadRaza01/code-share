@@ -1,26 +1,35 @@
 import React from "react";
+import FeatureNumber from "./FeatureNumber";
 
 export default function ShareCodeFeature() {
     return (
         <section>
-            <div className="h-[calc(100vh-72px)] text-white flex flex-col md:flex-row gap-10 justify-center items-center p-5 md:p-10 mt-10 md:mt-0 ">
+            <div className="relative min-h-[calc(100vh-72px)] text-white flex flex-col md:flex-row gap-10 justify-center items-center p-5 md:p-10 mt-10 md:mt-0 ">
 
-                    {/* left side text  */}
-                <div className="flex flex-col gap-3 md:gap-5 md:w-xl">
-                    <h1 className="text-3xl md:text-5xl font-medium">Share your code <span className="text-green-500">Instantly</span></h1>
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(34,197,94,0.08),transparent_60%)]" />
 
-                    <p>
-                        "Post code snippets with syntax highlighting. Share your solutions, experiments, and projects with the community.
-                    </p>
+                {/* left side text  */}
 
-                    <button className="w-44 bg-green-600 hover:bg-green-700 text-white font-medium active:scale-95 transition-all duration-200 rounded-xl px-6 py-3">
-                        Start Sharing
-                    </button>
+                <div className="flex  flex-col gap-6 z-10">
+
+                    <FeatureNumber number={1} />
+
+                    <div className="flex flex-col gap-3 md:gap-5 w-full max-w-xl">
+                        <h1 className="text-3xl md:text-5xl font-medium">Share your code <span className="text-green-500">Instantly</span></h1>
+
+                        <p>
+                            "Post code snippets with syntax highlighting. Share your solutions, experiments, and projects with the community.
+                        </p>
+
+                        <button className="w-44 bg-green-600 hover:bg-green-700 text-white font-medium active:scale-95 transition-all duration-200 rounded-xl px-6 py-3">
+                            Start Sharing
+                        </button>
+                    </div>
                 </div>
 
 
                 {/* right side */}
-                <div className="w-full flex-1 md:flex-none md:w-2xl">
+                <div className="flex-1 w-full max-w-2xl z-10">
                     <div className="bg-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-800 shadow-2xl shadow-green-600/5 hover:shadow-green-600/10 transition-all duration-300 overflow-hidden">
                         <div className="flex items-center justify-between px-4 py-3 bg-gray-800/50 border-b border-gray-800">
                             <div className="flex gap-2">
