@@ -7,7 +7,7 @@ export default function ShareCodeFeature() {
             <div className="relative min-h-[calc(100vh-72px)] text-white flex flex-col md:flex-row gap-10 justify-center items-center p-5 md:p-10 mt-10 md:mt-0 ">
 
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(34,197,94,0.08),transparent_60%)]" />
-
+                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-size-[40px_40px]" />
                 {/* left side text  */}
 
                 <div className="flex  flex-col gap-6 z-10">
