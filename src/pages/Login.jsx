@@ -3,6 +3,7 @@ import logo from "./../assets/logo.png"
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
 import { signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import EmailVerificationAlert from '../components/EmailVerificationAlert/EmailVerificationAlert'
 
 export default function Login() {
 
@@ -10,6 +11,7 @@ export default function Login() {
     let [email, setEmail] = useState("")
     let [error, setError] = useState("")
     let [showPassword, setShowPassword] = useState(false)
+    let [emailIsVerfied , setEmailIsVerfied] = useState(false)
 
     async function handleSignIn() {
         try {
@@ -26,9 +28,13 @@ export default function Login() {
             }
 
             let userCredential = await signInWithEmailAndPassword(auth, email, password)
-            // await sendEmailVerification(userCredential.user)
-
-            alert("Logged In")
+            if(userCredential.user.isVerified){
+                // dashboard
+            }
+            else{
+                setEmailIsVerfied(true)
+                return
+            }
 
         }
         catch (err) {
@@ -46,7 +52,9 @@ export default function Login() {
     }
 
     return (
-        <div className='bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-md w-full h-screen text-white flex justify-center items-center px-4'>
+        <div className='relative bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-md w-full h-screen text-white flex justify-center items-center px-4'>
+
+            {emailIsVerfied && <EmailVerificationAlert message={"Access denied. Your email is not verified yet. Please check your inbox (and spam folder) for the verification link before logging in."} />}
 
             <div className='w-full max-w-md rounded-2xl bg-gray-900/80 backdrop-blur-lg border border-gray-800 shadow-xl p-6 space-y-5'>
 
@@ -81,7 +89,6 @@ export default function Login() {
                         className='w-full bg-gray-800/70 border border-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition'
                         onChange={(e) => {
                             setPassword(e.target.value)
-                            setPasswordLength(e.target.value.length)
                             setError("")
                         }}
 

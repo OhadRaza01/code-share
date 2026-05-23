@@ -3,6 +3,7 @@ import logo from "./../assets/logo.png"
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import EmailVerificationAlert from '../components/EmailVerificationAlert/EmailVerificationAlert'
 
 export default function SignUpPage() {
 
@@ -12,6 +13,7 @@ export default function SignUpPage() {
   let [email, setEmail] = useState("")
   let [error, setError] = useState("")
   let [showPassword , setShowPassword] = useState(false)
+  let [registerSuccess , setRegisterSuccess] = useState(false)
 
   function checkSpecialCharacters(password) {
     const special_chars = ["!", "@", "#", "$", "%", "^", "*", "&"]
@@ -41,8 +43,7 @@ export default function SignUpPage() {
         
         let userCredential = await createUserWithEmailAndPassword(auth, email, password)
         await sendEmailVerification(userCredential.user)
-        
-        alert("email verification send")
+        setRegisterSuccess(true)
       
       }
       else if (passwordLength < 8 || !specialCharCheck) {
@@ -63,8 +64,11 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className='bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-md w-full h-screen text-white flex justify-center items-center px-4'>
+    <div className='relative bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-md w-full h-screen text-white flex justify-center items-center px-4'>
 
+      {registerSuccess && <EmailVerificationAlert message ={"Registration successful! We have sent a verification link to your email. Please check your inbox and verify your email before logging in."
+      } />}
+      
       <div className='w-full max-w-md rounded-2xl bg-gray-900/80 backdrop-blur-lg border border-gray-800 shadow-xl p-6 space-y-5'>
 
         {/* Logo and Title */}
