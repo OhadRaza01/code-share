@@ -2,6 +2,7 @@ import Features from "./components/Features/Features"
 import Footer from "./components/Footer/Footer"
 import Hero from "./components/Hero/Hero"
 import NavBar from "./components/NavBar/NavBar"
+import Login from "./pages/Login"
 import SignUpPage from "./pages/SignUpPage"
 
 
@@ -18,6 +19,7 @@ function App() {
       </main>
       <Footer />
       <SignUpPage />
+      <Login />
     </div>
     </>
   )

@@ -25,10 +25,18 @@ export default function SignUpPage() {
 
   async function handleSignUp() {
     try {
+      
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!email) {
         setError("Email is required")
         return
       }
+      
+      if (!(regex.test(email))){
+        setError("Invalid Email Format")
+        return
+      }
+      
       if (passwordLength >= 8 && specialCharCheck) {
         
         let userCredential = await createUserWithEmailAndPassword(auth, email, password)
@@ -44,10 +52,8 @@ export default function SignUpPage() {
       }
     }
     catch (err) {
-      if (err.code === 'auth/invalid-email') {
-        setError("Invalid email format")
-      } 
-      else if (err.code === 'auth/email-already-in-use') {
+      
+      if (err.code === 'auth/email-already-in-use') {
         setError("This Email is already registered")
       } 
       else {
@@ -57,7 +63,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className='bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-lg w-full h-screen text-white flex justify-center items-center px-4'>
+    <div className='bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-md w-full h-screen text-white flex justify-center items-center px-4'>
 
       <div className='w-full max-w-md rounded-2xl bg-gray-900/80 backdrop-blur-lg border border-gray-800 shadow-xl p-6 space-y-5'>
 
@@ -130,11 +136,9 @@ export default function SignUpPage() {
 
         </div>
 
-
         <button onClick={handleSignUp} className='w-full bg-green-600 hover:bg-green-500 transition font-medium py-2.5 rounded-xl shadow-md'>
           Sign Up
         </button>
-
 
         <p className='text-center text-gray-400'>
           Already have an account?{" "}
