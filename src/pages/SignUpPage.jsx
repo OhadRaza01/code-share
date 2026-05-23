@@ -57,7 +57,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className='bg-linear-to-br from-gray-950 via-gray-900 to-black text-lg w-full h-screen text-white flex justify-center items-center px-4'>
+    <div className='bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-lg w-full h-screen text-white flex justify-center items-center px-4'>
 
       <div className='w-full max-w-md rounded-2xl bg-gray-900/80 backdrop-blur-lg border border-gray-800 shadow-xl p-6 space-y-5'>
 
@@ -99,7 +99,7 @@ export default function SignUpPage() {
           />
           <div className='flex gap-3 p-1'>
             <input id="showpass" type="checkbox" 
-            className='accent-green-500 p-1 '
+            className='accent-green-500 w-3.5 '
             onChange={(e)=>{
               setShowPassword(!showPassword)
             }}
@@ -109,7 +109,8 @@ export default function SignUpPage() {
           </div>
         </div>
 
-        {error && <div className=' w-full text-center text-md text-red-600' >{error}</div>}
+        {/* error div  */}
+        {error && <div className=' w-full text-center text-md text-red-600 -mt-2' >{error}</div>}
 
         <div className="space-y-2 ">
 
