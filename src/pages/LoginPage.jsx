@@ -5,7 +5,7 @@ import { auth } from '../firebase'
 import { signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import EmailVerificationAlert from '../components/EmailVerificationAlert/EmailVerificationAlert'
 
-export default function Login() {
+export default function LoginPage() {
 
     let [password, setPassword] = useState("")
     let [email, setEmail] = useState("")
@@ -114,9 +114,9 @@ export default function Login() {
 
                 <p className='text-center text-gray-400'>
                     Dont have an account?{" "}
-                    <a to="/" className='text-green-500 hover:underline'>
+                    <Link to="/signup" className='text-green-500 hover:underline'>
                         Sign up
-                    </a>
+                    </Link>
                 </p>
 
             </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from "../../assets/logo.png"
+import { Link } from 'react-router-dom'
 
 export default function NavBar() {
     return (
@@ -14,12 +15,17 @@ export default function NavBar() {
                     &#9776;
                 </div>
                 <div className='justify-center items-center gap-6 hidden md:flex font-medium'>
-                    <button className='pl-4 pr-4 pt-2 pb-2 border border-green-500/60 text-green-400 rounded-lg cursor-pointer  active:scale-95 hover:bg-white/10'>
+
+                    <Link to="/login"
+                        className='pl-4 pr-4 pt-2 pb-2 border border-green-500/60 text-green-400 rounded-lg cursor-pointer  active:scale-95 hover:bg-white/10'>
                         Log In
-                    </button>
-                    <button className='bg-green-600  pl-4 pr-4 pt-2 pb-2 rounded-lg cursor-pointer hover:bg-green-700 font-medium transition-all active:scale-95'>
+                    </Link>
+
+                    <Link to="/signup"
+                        className='bg-green-600  pl-4 pr-4 pt-2 pb-2 rounded-lg cursor-pointer hover:bg-green-700 font-medium transition-all active:scale-95'>
                         Sign Up
-                    </button>
+                    </Link>
+
                 </div>
             </nav>
         </header>

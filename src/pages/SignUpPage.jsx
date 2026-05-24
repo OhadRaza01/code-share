@@ -12,8 +12,8 @@ export default function SignUpPage() {
   let [specialCharCheck, setSpecialCharCheck] = useState(false)
   let [email, setEmail] = useState("")
   let [error, setError] = useState("")
-  let [showPassword , setShowPassword] = useState(false)
-  let [registerSuccess , setRegisterSuccess] = useState(false)
+  let [showPassword, setShowPassword] = useState(false)
+  let [registerSuccess, setRegisterSuccess] = useState(false)
 
   function checkSpecialCharacters(password) {
     const special_chars = ["!", "@", "#", "$", "%", "^", "*", "&"]
@@ -27,36 +27,36 @@ export default function SignUpPage() {
 
   async function handleSignUp() {
     try {
-      
+
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!email) {
         setError("Email is required")
         return
       }
-      
-      if (!(regex.test(email))){
+
+      if (!(regex.test(email))) {
         setError("Invalid Email Format")
         return
       }
-      
+
       if (passwordLength >= 8 && specialCharCheck) {
-        
+
         let userCredential = await createUserWithEmailAndPassword(auth, email, password)
         await sendEmailVerification(userCredential.user)
         setRegisterSuccess(true)
-      
+
       }
       else if (passwordLength < 8 || !specialCharCheck) {
-        
+
         setError("Password must be 8+ characters with a special character")
-      
+
       }
     }
     catch (err) {
-      
+
       if (err.code === 'auth/email-already-in-use') {
         setError("This Email is already registered")
-      } 
+      }
       else {
         setError(err.message)
       }
@@ -66,9 +66,9 @@ export default function SignUpPage() {
   return (
     <div className='relative bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-md w-full h-screen text-white flex justify-center items-center px-4'>
 
-      {registerSuccess && <EmailVerificationAlert message ={"Registration successful! We have sent a verification link to your email. Please check your inbox and verify your email before logging in."
+      {registerSuccess && <EmailVerificationAlert message={"Registration successful! We have sent a verification link to your email. Please check your inbox and verify your email before logging in."
       } />}
-      
+
       <div className='w-full max-w-md rounded-2xl bg-gray-900/80 backdrop-blur-lg border border-gray-800 shadow-xl p-6 space-y-5'>
 
         {/* Logo and Title */}
@@ -108,11 +108,11 @@ export default function SignUpPage() {
 
           />
           <div className='flex gap-3 p-1'>
-            <input id="showpass" type="checkbox" 
-            className='accent-green-500 w-3.5 '
-            onChange={(e)=>{
-              setShowPassword(!showPassword)
-            }}
+            <input id="showpass" type="checkbox"
+              className='accent-green-500 w-3.5 '
+              onChange={(e) => {
+                setShowPassword(!showPassword)
+              }}
             />
             <label htmlFor="showpass" className='text-gray-400'>Show Password</label>
 
@@ -146,9 +146,9 @@ export default function SignUpPage() {
 
         <p className='text-center text-gray-400'>
           Already have an account?{" "}
-          <a to="/" className='text-green-500 hover:underline'>
+          <Link to="/login" className='text-green-500 hover:underline'>
             Sign in
-          </a>
+          </Link>
         </p>
 
       </div>

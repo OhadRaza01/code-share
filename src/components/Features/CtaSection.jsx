@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function CtaSection() {
     return (
         <section className="min-h-[calc(100vh-72px)] flex justify-center items-center relative bg-gray-950 py-20 px-4 md:px-6 overflow-hidden">
-           
+
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(34,197,94,0.1),transparent_60%)]" />
 
-            
+
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-size-[40px_40px]" />
 
             <div className="relative z-10 max-w-3xl">
@@ -31,12 +32,11 @@ export default function CtaSection() {
                     </p>
 
                     <div className="flex flex-row gap-4 md:justify-center">
-                        <button className="group flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 text-white font-medium active:scale-95 transition-all duration-200 rounded-xl px-8 py-3 text-lg shadow-lg shadow-green-600/20 hover:shadow-green-500/30">
+                        <Link to="/signup"
+                            className="w-full md:w-fit  group flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium active:scale-95 transition-all duration-200 rounded-xl px-8 py-3 text-lg shadow-lg shadow-green-600/20 hover:shadow-green-500/30">
                             Get Started — It's Free
-                            <svg className="group-hover:translate-x-1 transition-transform" width="18" height="18" viewBox="0 0 20 20" fill="none">
-                                <path d="M4.166 10h11.667m0 0L9.999 4.165m5.834 5.833-5.834 5.834" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </button>
+
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import FeatureNumber from "./FeatureNumber";
+import { Link } from "react-router-dom";
 
 export default function ReviewCodeFeature() {
     return (
         <section>
 
-            <div className="relative  min-h-[calc(100vh-72px)] text-white flex flex-col md:flex-row gap-10 justify-center items-center p-5 md:p-10 mt-10 md:mt-0 ">
+            <div className="relative  min-h-[calc(100vh-72px)] bg-gray-950 text-white flex flex-col md:flex-row gap-10 justify-center items-center p-5 md:p-10 mt-10 md:mt-0 ">
 
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(34,197,94,0.08),transparent_60%)]" />
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-size[40px_40px]" />
@@ -68,7 +69,7 @@ export default function ReviewCodeFeature() {
                         Learn best practices, improve code quality, and write cleaner
                         code with actionable suggestions.
                     </p>
-                    <ul className="space-y-3 mb-8">
+                    <ul className="space-y-3 mb-4">
                         <li className="text-gray-300 text-sm md:text-base flex items-center gap-2 ">
                             <span className="text-green-500">•</span>
                             <span>Detailed code reviews within hours</span>
@@ -83,9 +84,12 @@ export default function ReviewCodeFeature() {
                         </li>
                     </ul>
 
-                    <button className="w-44 bg-green-600 hover:bg-green-700 text-white font-medium active:scale-95 transition-all duration-200 rounded-xl px-6 py-3">
+                    {/* <Link to="/signup"
+                        className="w-44 bg-green-600 hover:bg-green-700 cursor-pointer text-white font-medium active:scale-95 transition-all duration-200 rounded-xl px-6 py-3">
                         Start Sharing
-                    </button>
+
+                    </Link> */}
+
                 </div>
 
             </div>

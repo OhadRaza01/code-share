@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -16,7 +17,9 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-8 md:mt-10">
-          <button className="group flex items-center justify-center gap-2 active:scale-95 bg-green-600 hover:bg-green-700 font-medium transition-all duration-200 rounded-xl px-6 py-3">
+
+          <Link to="/signup"
+            className="group flex items-center justify-center gap-2 active:scale-95 bg-green-600 hover:bg-green-700 font-medium transition-all duration-200 rounded-xl px-6 py-3">
             Get started
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path
@@ -27,7 +30,7 @@ export default function Hero() {
                 strokeLinejoin="round"
               />
             </svg>
-          </button>
+          </Link>
 
           <button className="border border-green-500/60 text-green-400  hover:bg-white/10 hover:border-green-400 active:scale-95 transition-all duration-200 rounded-xl px-7 py-3 font-medium backdrop-blur-sm">
             Explore

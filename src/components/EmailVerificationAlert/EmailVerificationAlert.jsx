@@ -6,13 +6,12 @@ export default function EmailVerificationAlert({ message }) {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        // Mount hone ke baad animate karo
         setTimeout(() => setShow(true), 10)
     }, [])
 
     function handleClose() {
         setShow(false)
-        setTimeout(() => setVisible(false), 300) // animation khatam hone ke baad hide karo
+        setTimeout(() => setVisible(false), 300)
     }
 
     if (!visible) return null;
