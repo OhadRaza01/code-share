@@ -6,6 +6,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, R
 import LandingPage from './pages/LandingPage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
+import DashboardNav from './components/DashboardNav/DashboardNav.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router = {router} />
+    {/* <RouterProvider router = {router} /> */}
+    <DashboardNav />
   </StrictMode>,
 )
