@@ -53,10 +53,10 @@ export default function SignUpPage() {
       if (passwordLength >= 8 && specialCharCheck) {
 
         let userCredential = await createUserWithEmailAndPassword(auth, email, password)
+        await sendEmailVerification(userCredential.user)
         await updateProfile(userCredential.user , {
           displayName : username
         })
-        await sendEmailVerification(userCredential.user)
         setRegisterSuccess(true)
 
       }
