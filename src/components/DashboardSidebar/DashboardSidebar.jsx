@@ -44,8 +44,6 @@ export default function DashboardSidebar() {
             }>
             <FaUserCircle className="text-lg" />
             <span>Profile</span>
-
-
           </NavLink>
 
           {/* Terminal */}
