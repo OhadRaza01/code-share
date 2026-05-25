@@ -2,8 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from "../../assets/logo.png"
 import logout from "../../assets/logout.png"
+import { useAuth } from '../Context/AuthContext'
 
 export default function DashboardNav() {
+
+    const {user} = useAuth()
+
     return (
         <header className='sticky top-0 left-0 z-50'>
             <nav className='flex justify-between items-center text-md p-4 bg-gray-950 border-b border-b-gray-700 text-white h-16'>
@@ -24,7 +28,7 @@ export default function DashboardNav() {
                     <a href="">
                         
                         <div className='w-8 h-8 rounded-full bg-green-600 flex justify-center items-center font-bold text-sm'>
-                            OR
+                            {user.displayName.charAt(0)}
                         </div>
                     </a>
 
@@ -35,9 +39,6 @@ export default function DashboardNav() {
                             alt=" logout icon"
                             width={18}
                         />
-                        {/* <span>
-                            logout
-                        </span> */}
                     </a>
 
                 </div>

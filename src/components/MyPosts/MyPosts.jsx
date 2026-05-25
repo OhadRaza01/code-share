@@ -1,0 +1,46 @@
+import React from 'react'
+import { useState, useEffect } from 'react'
+import { getDocs, collection, query, where } from 'firebase/firestore'
+import { db } from '../../firebase'
+import { useAuth } from '../Context/AuthContext'
+import Post from '../Feed/Post'
+
+export default function MyPosts() {
+
+    const { user } = useAuth()
+    const [posts, setPosts] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchPosts() {
+            const q = query(
+                collection(db, "posts"),
+                where("userId", "==", user.uid) 
+            )
+            const snapshot = await getDocs(q)
+            const postsArray = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }))
+            setPosts(postsArray)
+            setLoading(false)
+        }
+        fetchPosts()
+    }, [])
+
+    return (
+        <main className="flex-1 max-w-3xl px-4">
+            {/* Posts Feed */}
+            <div className="space-y-6">
+                {loading ? (
+                    <div className="text-gray-400 text-center py-10">Loading posts...</div>
+                ) : (
+                    posts.map((post) => (
+                        <Post key={post.id} char={post.username.charAt(0)} name={post.username} time={post.createdAt?.toDate().toLocaleDateString()} language={post.codeLanguage} title={post.title}
+                            code={post.code} upvotes={post.upvotes} downvotes={post.downvotes} comments={post.comments} />
+                    ))
+                )}
+            </div>
+        </main>
+    )
+}
