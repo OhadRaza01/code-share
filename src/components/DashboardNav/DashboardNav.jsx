@@ -18,7 +18,7 @@ export default function DashboardNav() {
 
                     <input type="text"
                         placeholder='Search'
-                        className='pl-2 pr-2 bg-gray-900 rounded-md'
+                        className='pl-2 pr-2 pt-0.5 pb-0.5 bg-gray-900 rounded-md'
                     />
 
                     <a href="">

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import logo from "./../assets/logo.png"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../firebase'
 import { signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import EmailVerificationAlert from '../components/EmailVerificationAlert/EmailVerificationAlert'
+import logo from "./../assets/logo.png"
 
 export default function LoginPage() {
 
@@ -12,6 +12,8 @@ export default function LoginPage() {
     let [error, setError] = useState("")
     let [showPassword, setShowPassword] = useState(false)
     let [emailIsVerfied , setEmailIsVerfied] = useState(false)
+
+    const navigate = useNavigate()
 
     async function handleSignIn() {
         try {
@@ -28,11 +30,12 @@ export default function LoginPage() {
             }
 
             let userCredential = await signInWithEmailAndPassword(auth, email, password)
-            if(userCredential.user.isVerified){
-                // dashboard
+            if(userCredential.user.emailVerified){
+                navigate('/dashboard')
             }
             else{
                 setEmailIsVerfied(true)
+                await sendEmailVerification(userCredential.user)
                 return
             }
 
