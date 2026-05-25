@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import EmailVerificationAlert from '../components/EmailVerificationAlert/EmailVerificationAlert'
+import { updateProfile } from 'firebase/auth'
 
 export default function SignUpPage() {
 
@@ -14,6 +15,7 @@ export default function SignUpPage() {
   let [error, setError] = useState("")
   let [showPassword, setShowPassword] = useState(false)
   let [registerSuccess, setRegisterSuccess] = useState(false)
+  let [username , setUsername] = useState("")
 
   function checkSpecialCharacters(password) {
     const special_chars = ["!", "@", "#", "$", "%", "^", "*", "&"]
@@ -27,8 +29,16 @@ export default function SignUpPage() {
 
   async function handleSignUp() {
     try {
-
+      
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!username){
+        setError("Username is required")
+        return
+      }
+
+      if(username.length <= 3){
+        setError("Username is too Short")
+      }
       if (!email) {
         setError("Email is required")
         return
@@ -39,9 +49,13 @@ export default function SignUpPage() {
         return
       }
 
+
       if (passwordLength >= 8 && specialCharCheck) {
 
         let userCredential = await createUserWithEmailAndPassword(auth, email, password)
+        await updateProfile(userCredential.user , {
+          displayName : username
+        })
         await sendEmailVerification(userCredential.user)
         setRegisterSuccess(true)
 
@@ -78,6 +92,20 @@ export default function SignUpPage() {
           <p className=' text-gray-400'>Join and start sharing code</p>
         </div>
 
+        <div className='space-y-1'>
+          <label className=' text-gray-300'>Username</label>
+          <input
+            type="username"
+            placeholder='username'
+            className='w-full bg-gray-800/70 border border-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition'
+            onChange={(e) => {
+              setUsername(e.target.value.trim())
+              setError("")
+            }}
+            required
+          />
+        </div>
+
         {/* Email */}
         <div className='space-y-1'>
           <label className=' text-gray-300'>Email</label>
@@ -91,6 +119,7 @@ export default function SignUpPage() {
             }}
             required
           />
+
         </div>
 
         {/* Password */}
