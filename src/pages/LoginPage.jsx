@@ -6,12 +6,11 @@ import EmailVerificationAlert from '../components/EmailVerificationAlert/EmailVe
 import logo from "./../assets/logo.png"
 
 export default function LoginPage() {
-
     let [password, setPassword] = useState("")
     let [email, setEmail] = useState("")
     let [error, setError] = useState("")
     let [showPassword, setShowPassword] = useState(false)
-    let [emailIsVerfied , setEmailIsVerfied] = useState(false)
+    let [emailIsVerfied, setEmailIsVerfied] = useState(false)
 
     const navigate = useNavigate()
 
@@ -30,10 +29,9 @@ export default function LoginPage() {
             }
 
             let userCredential = await signInWithEmailAndPassword(auth, email, password)
-            if(userCredential.user.emailVerified){
+            if (userCredential.user.emailVerified) {
                 navigate('/dashboard')
-            }
-            else{
+            }else {
                 setEmailIsVerfied(true)
                 await sendEmailVerification(userCredential.user)
                 return
@@ -45,7 +43,7 @@ export default function LoginPage() {
             if (err.code === 'auth/invalid-credential') {
                 setError("Invalid email or password.")
             }
-            else if(err.code === "auth/missing-password"){
+            else if (err.code === "auth/missing-password") {
                 setError("Password is missing.")
             }
             else {

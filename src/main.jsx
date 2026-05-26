@@ -19,9 +19,9 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />}>
-        <Route index = {true} element = {<Feed/>} />
-        <Route path='/dashboard/myposts' element = {<MyPosts/>} />
-        <Route path='/dashboard/profile' element = {<Profile/>} />
+        <Route index={true} element={<Feed />} />
+        <Route path='/dashboard/myposts' element={<MyPosts />} />
+        <Route path='/dashboard/profile' element={<Profile />} />
       </Route>
     </Route>
   )
@@ -30,8 +30,6 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <RouterProvider router={router} />
   </StrictMode>,
 )
