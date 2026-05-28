@@ -1,6 +1,52 @@
-import React from 'react'
+import { arrayRemove, arrayUnion, doc, getDoc, increment, updateDoc } from 'firebase/firestore'
+import React, { useState } from 'react'
+import { db } from '../../firebase'
+import { useAuth } from '../Context/AuthContext'
 
-export default function Post({char , name , time , language , title ,code ,upvotes ,downvotes ,comments  }) {
+export default function Post({upvotedBy ,downvotedBy , postId, char, name, time, language, title, code, upvotes, downvotes, comments }) {
+
+    const { user } = useAuth()
+
+    async function handleUpvote() {
+        const postRef = doc(db, "posts", postId);
+
+        const alreadyUpvoted = upvotedBy?.includes(user.uid);
+
+        if (!alreadyUpvoted) {
+            await updateDoc(postRef, {
+                upvotes: increment(1),
+                upvotedBy: arrayUnion(user.uid),
+            });
+            return;
+        }
+        else{
+            await updateDoc(postRef,{
+                upvotes : increment(-1),
+                upvotedBy: arrayRemove(user.uid)
+            })
+        }
+    }
+    
+    async function handleDownvote() {
+        const postRef = doc(db, "posts", postId);
+
+        const alreadyDownvoted = downvotedBy?.includes(user.uid);
+
+        if (!alreadyDownvoted) {
+            await updateDoc(postRef, {
+                downvotes: increment(1),
+                downvotedBy: arrayUnion(user.uid),
+            });
+            return;
+        }
+        else{
+            await updateDoc(postRef,{
+                downvotes : increment(-1),
+                downvotedBy: arrayRemove(user.uid)
+            })
+        }
+    }
+
     return (
         <div className="bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden hover:border-gray-600 transition-all duration-200">
 
@@ -42,13 +88,13 @@ export default function Post({char , name , time , language , title ,code ,upvot
             <div className="px-5 py-3 border-t border-gray-700 flex items-center gap-6">
 
                 {/* Upvote */}
-                <button className="flex items-center gap-1.5 text-gray-400 hover:text-green-400 transition text-sm">
+                <button onClick={handleUpvote} className="flex items-center gap-1.5 text-gray-400 hover:text-green-400 transition text-sm">
                     <span>▲</span>
                     <span>{upvotes}</span>
                 </button>
 
                 {/* Downvote */}
-                <button className="flex items-center gap-1.5 text-gray-400 hover:text-red-400 transition text-sm">
+                <button onClick={handleDownvote} className="flex items-center gap-1.5 text-gray-400 hover:text-red-400 transition text-sm">
                     <span>▼</span>
                     <span>{downvotes}</span>
                 </button>
