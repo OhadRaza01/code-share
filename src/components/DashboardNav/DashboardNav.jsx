@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logo from "../../assets/logo.png"
 import logout from "../../assets/logout.png"
 import { useAuth } from '../Context/AuthContext'
@@ -25,12 +25,12 @@ export default function DashboardNav() {
                         className='pl-2 pr-2 pt-0.5 pb-0.5 bg-gray-900 rounded-md'
                     />
 
-                    <a href="">
+                    <NavLink to="/dashboard/profile">
                         
                         <div className='w-8 h-8 rounded-full bg-green-600 flex justify-center items-center font-bold text-sm'>
                             {user.displayName.charAt(0)}
                         </div>
-                    </a>
+                    </NavLink>
 
 
                     <a href="/"

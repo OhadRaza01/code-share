@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '../Context/AuthContext'
 import { updateProfile } from 'firebase/auth'
 import { auth, db } from '../../firebase'
-import { collection, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore'
+import MyPosts from '../MyPosts/MyPosts'
 
 
 export default function Profile() {
@@ -14,6 +15,7 @@ export default function Profile() {
   const [website, setWebsite] = useState("")
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState([])
+  const [userInfo, setUserInfo] = useState(null)
 
   async function handleUpdate() {
     try {
@@ -21,6 +23,7 @@ export default function Profile() {
       await updateProfile(auth.currentUser, {
         displayName: name
       })
+      await updateUserProfile()
       setIsEditing(false)
     } catch (err) {
       console.log(err.message)
@@ -30,11 +33,30 @@ export default function Profile() {
   }
 
   async function UpadetDetailsONEveryPost() {
-    
-    await updateDoc(doc(db ,"posts" ,user.uid))
-    username : name
+
+    await updateDoc(doc(db, "posts", user.uid))
+    username: name
 
   }
+
+  async function updateUserProfile() {
+    await setDoc(doc(db, "users", user.uid), {
+      username: name,
+      bio: bio,
+      location: location,
+      website: website
+    }, { merge: true })
+  }
+
+  useEffect(() => {
+    async function getUserProfile() {
+      const userDoc = await getDoc(doc(db, "users", user.uid))
+      if (userDoc.exists()) {
+        setUserInfo(userDoc.data())
+      }
+    }
+    getUserProfile()
+  }, [])
 
   return (
     <main className="flex-1 max-w-3xl px-4 py-8">
@@ -77,10 +99,10 @@ export default function Profile() {
           <div className="flex flex-col gap-2">
             <h1 className="text-xl font-bold text-white">{user?.displayName}</h1>
             <p className="text-gray-500 text-sm">{user?.email}</p>
-            {bio && <p className="text-gray-300 text-sm">{bio}</p>}
+            {userInfo?.bio && <p className="text-gray-300 text-sm">{userInfo.bio}</p>}
             <div className="flex gap-4 text-gray-500 text-sm">
-              {location && <span>📍 {location}</span>}
-              {website && <a href={website} target="_blank" className="text-blue-400 hover:underline">🔗 {website}</a>}
+              {userInfo?.location && <span>📍 {userInfo.location}</span>}
+              {userInfo?.website && <a href={userInfo.website} target="_blank" className="text-blue-400 hover:underline">🔗 {userInfo.website}</a>}
             </div>
           </div>
         ) : (
@@ -142,9 +164,11 @@ export default function Profile() {
       </div>
 
       {/* Posts placeholder */}
-      <div className="mt-8 border border-gray-800 rounded-xl p-6 text-center text-gray-500">
-        No posts yet. Share your first code snippet!
+      <div className="mt-8 border border-gray-800 rounded-xl p-6 text-gray-500">
+        {/* No posts yet. Share your first code snippet! */}
+        <MyPosts />
       </div>
+
 
     </main>
   )
