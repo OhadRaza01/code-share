@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../Context/AuthContext'
 import { updateProfile } from 'firebase/auth'
 import { auth, db } from '../../firebase'
-import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore'
 import MyPosts from '../MyPosts/MyPosts'
 
 
@@ -49,13 +49,17 @@ export default function Profile() {
   }
 
   useEffect(() => {
-    async function getUserProfile() {
-      const userDoc = await getDoc(doc(db, "users", user.uid))
-      if (userDoc.exists()) {
-        setUserInfo(userDoc.data())
-      }
-    }
-    getUserProfile()
+    // async function getUserProfile() {
+    //   const userDoc = await getDoc(doc(db, "users", user.uid))
+    //   if (userDoc.exists()) {
+    //     setUserInfo(userDoc.data())
+    //   }
+    // }
+    // getUserProfile()
+    const unsub = onSnapshot(doc(db, "users", user.uid),(snapshot)=>{
+      setUserInfo(snapshot.data())
+    })
+    return () => unsub();
   }, [])
 
   return (
