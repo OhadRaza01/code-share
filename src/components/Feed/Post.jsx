@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { db } from '../../firebase'
 import { useAuth } from '../Context/AuthContext'
 
-export default function Post({upvotedBy ,downvotedBy , postId, char, name, time, language, title, code, upvotes, downvotes, comments }) {
+export default function Post({ upvotedBy, downvotedBy, postId, char, name, time, language, title, code, upvotes, downvotes, comments }) {
 
     const { user } = useAuth()
 
@@ -11,40 +11,49 @@ export default function Post({upvotedBy ,downvotedBy , postId, char, name, time,
         const postRef = doc(db, "posts", postId);
 
         const alreadyUpvoted = upvotedBy?.includes(user.uid);
+        const alreadyDownvoted = downvotedBy?.includes(user.uid);
 
-        if (!alreadyUpvoted) {
-            await updateDoc(postRef, {
-                upvotes: increment(1),
-                upvotedBy: arrayUnion(user.uid),
-            });
-            return;
+        let updates = {};
+
+        if (alreadyUpvoted) {
+            updates.upvotes = increment(-1);
+            updates.upvotedBy = arrayRemove(user.uid);
+        } else {
+            updates.upvotes = increment(1);
+            updates.upvotedBy = arrayUnion(user.uid);
+
+            if (alreadyDownvoted) {
+                updates.downvotes = increment(-1);
+                updates.downvotedBy = arrayRemove(user.uid);
+            }
         }
-        else{
-            await updateDoc(postRef,{
-                upvotes : increment(-1),
-                upvotedBy: arrayRemove(user.uid)
-            })
-        }
+
+        await updateDoc(postRef, updates);
     }
-    
+
     async function handleDownvote() {
         const postRef = doc(db, "posts", postId);
 
         const alreadyDownvoted = downvotedBy?.includes(user.uid);
+        const alreadyUpvoted = upvotedBy?.includes(user.uid);
 
-        if (!alreadyDownvoted) {
-            await updateDoc(postRef, {
-                downvotes: increment(1),
-                downvotedBy: arrayUnion(user.uid),
-            });
-            return;
+        const updates = {}
+        
+        if(alreadyDownvoted){
+            updates.downvotes = increment(-1),
+            updates.downvotedBy = arrayRemove(user.uid)
         }
         else{
-            await updateDoc(postRef,{
-                downvotes : increment(-1),
-                downvotedBy: arrayRemove(user.uid)
-            })
+            updates.downvotes = increment(1),
+            updates.downvotedBy = arrayUnion(user.uid)
+
+            if(alreadyUpvoted){
+                updates.upvotes = increment(-1),
+                updates.upvotedBy = arrayRemove(user.uid)
+            }
         }
+        await updateDoc(postRef , updates)
+        
     }
 
     return (
