@@ -1,8 +1,8 @@
 import { arrayRemove, arrayUnion, doc, getDoc, increment, updateDoc } from 'firebase/firestore'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { useAuth } from '../Context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 export default function Post({ upvotedBy, downvotedBy, postId, char, name, time, language, title, code, upvotes, downvotes, comments }) {
 
     const { user } = useAuth()
@@ -112,10 +112,10 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                 </button>
 
                 {/* Comments */}
-                <button className="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 transition text-sm">
+                <NavLink to={`/dashboard/post/${postId}`} className="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 transition text-sm">
                     <span>💬</span>
                     <span>{comments} comments</span>
-                </button>
+                </NavLink>
 
             </div>
         </div>
