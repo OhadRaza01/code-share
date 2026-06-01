@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 export default function DashboardSidebar() {
   return (
     <aside className="w-full md:w-64 shrink-0 px-2">
-      <div className="bg-gray-900 text-white rounded-2xl shadow-xl p-4 sticky top-16">
+      <div className="bg-gray-900 text-white rounded-md shadow-xl p-4 sticky top-16">
         <div className="space-y-3">
           {/* Feed */}
           <NavLink

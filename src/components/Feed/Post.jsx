@@ -2,7 +2,7 @@ import { arrayRemove, arrayUnion, doc, getDoc, increment, updateDoc } from 'fire
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { useAuth } from '../Context/AuthContext'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 export default function Post({ upvotedBy, downvotedBy, postId, char, name, time, language, title, code, upvotes, downvotes, comments }) {
 
     const { user } = useAuth()
@@ -31,7 +31,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
         await updateDoc(postRef, updates);
     }
 
-    async function handleDownvote() {   
+    async function handleDownvote() {
         const postRef = doc(db, "posts", postId);
 
         const alreadyDownvoted = downvotedBy?.includes(user.uid);
@@ -60,7 +60,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
         <div className="bg-gray-900 border border-gray-700 rounded-md overflow-hidden hover:border-gray-600 transition-all duration-200">
 
             {/* Header */}
-            <div onClick={() => navigate(`/dashboard/post/${postId}`)} >
+            <Link to={`/dashboard/post/${postId}`} >
 
                 <div className="p-5">
                     <div className="flex items-center justify-between">
@@ -95,7 +95,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                     </pre>
                 </div>
 
-            </div>
+            </Link>
             {/* Actions */}
             <div className="px-5 py-3 border-t border-gray-700 flex items-center gap-6">
 

@@ -92,7 +92,7 @@ export default function PostDetail() {
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                             placeholder="Share your thoughts..."
-                            className="w-full resize-none bg-[#0d1117] border border-[#30363d] rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            className="w-full resize-none bg-[#0d1117] border border-[#30363d] rounded-md px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                         />
                         <button
                             onClick={addComment}
@@ -116,7 +116,7 @@ export default function PostDetail() {
                                 <div className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-sm font-bold text-white shrink-0">
                                     {c.username?.charAt(0)}
                                 </div>
-                                <div className="flex-1 bg-[#0d1117] border border-[#30363d] rounded-xl px-4 py-3">
+                                <div className="flex-1 bg-[#0d1117] border border-[#30363d] rounded-md px-4 py-3">
                                     <div className="flex items-center gap-2 mb-1">
                                         <p className="text-white text-sm font-medium">{c.username}</p>
                                         <p className="text-gray-500 text-xs">
