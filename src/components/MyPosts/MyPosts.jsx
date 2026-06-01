@@ -34,6 +34,7 @@ export default function MyPosts() {
         <main className="flex-1 max-w-3xl px-4">
             {/* Posts Feed */}
             <div className="space-y-6">
+            <h1 className='text-md text-white font-medium pl-1'>My Posts</h1>
                 {loading ? (
                     <div className="text-gray-400 text-center py-10">Loading posts...</div>
                 ) : (

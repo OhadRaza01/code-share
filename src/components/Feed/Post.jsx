@@ -88,7 +88,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                     <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
                     <span className="text-xs text-gray-500 ml-2">{language}</span>
                 </div>
-                <pre className="p-4 text-sm text-gray-300 font-mono overflow-x-auto">
+                <pre className="p-4 text-sm max-h-96 text-gray-300 font-mono overflow-x-auto">
                     <code>{code}</code>
                 </pre>
             </div>

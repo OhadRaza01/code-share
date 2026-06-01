@@ -6,7 +6,7 @@ import { useAuth } from '../Context/AuthContext'
 export default function CreatePost() {
 
     let [title, setTitle] = useState("")
-    let [language, setLanguage] = useState("")
+    let [language, setLanguage] = useState("Javascript")
     let [code, setCode] = useState("")
 
     const { user } = useAuth()
@@ -25,7 +25,7 @@ export default function CreatePost() {
         })
     }
     return (
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-8">
+        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-5 mb-6">
             <div className="flex items-start gap-4">
 
                 {/* Avatar */}

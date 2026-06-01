@@ -30,6 +30,7 @@ export default function Feed() {
 
       {/* Posts Feed */}
       <div className="space-y-6">
+        <h1 className="text-md text-white font-medium pl-1">Feed</h1>
         {loading ? (
           <div className="text-gray-400 text-center py-10">Loading posts...</div>
         ) : (
