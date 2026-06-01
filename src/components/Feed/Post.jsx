@@ -2,11 +2,11 @@ import { arrayRemove, arrayUnion, doc, getDoc, increment, updateDoc } from 'fire
 import React, { useState } from 'react'
 import { db } from '../../firebase'
 import { useAuth } from '../Context/AuthContext'
-
+import { useNavigate } from 'react-router-dom'
 export default function Post({ upvotedBy, downvotedBy, postId, char, name, time, language, title, code, upvotes, downvotes, comments }) {
 
     const { user } = useAuth()
-
+    const navigate = useNavigate()
     async function handleUpvote() {
         const postRef = doc(db, "posts", postId);
 
@@ -31,68 +31,71 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
         await updateDoc(postRef, updates);
     }
 
-    async function handleDownvote() {
+    async function handleDownvote() {   
         const postRef = doc(db, "posts", postId);
 
         const alreadyDownvoted = downvotedBy?.includes(user.uid);
         const alreadyUpvoted = upvotedBy?.includes(user.uid);
 
         const updates = {}
-        
-        if(alreadyDownvoted){
-            updates.downvotes = increment(-1),
-            updates.downvotedBy = arrayRemove(user.uid)
-        }
-        else{
-            updates.downvotes = increment(1),
-            updates.downvotedBy = arrayUnion(user.uid)
 
-            if(alreadyUpvoted){
+        if (alreadyDownvoted) {
+            updates.downvotes = increment(-1),
+                updates.downvotedBy = arrayRemove(user.uid)
+        }
+        else {
+            updates.downvotes = increment(1),
+                updates.downvotedBy = arrayUnion(user.uid)
+
+            if (alreadyUpvoted) {
                 updates.upvotes = increment(-1),
-                updates.upvotedBy = arrayRemove(user.uid)
+                    updates.upvotedBy = arrayRemove(user.uid)
             }
         }
-        await updateDoc(postRef , updates)
-        
+        await updateDoc(postRef, updates)
+
     }
 
     return (
-        <div className="bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden hover:border-gray-600 transition-all duration-200">
+        <div className="bg-gray-900 border border-gray-700 rounded-md overflow-hidden hover:border-gray-600 transition-all duration-200">
 
             {/* Header */}
-            <div className="p-5">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center font-bold text-sm">
-                            {char}
+            <div onClick={() => navigate(`/dashboard/post/${postId}`)} >
+
+                <div className="p-5">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center font-bold text-sm">
+                                {char}
+                            </div>
+                            <div>
+                                <h3 className="text-sm font-semibold text-white">{name}</h3>
+                                <p className="text-xs text-gray-500">{time}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 className="text-sm font-semibold text-white">{name}</h3>
-                            <p className="text-xs text-gray-500">{time}</p>
-                        </div>
+                        <span className="text-xs bg-green-600/20 border border-green-500/30 text-green-400 px-3 py-1 rounded-full">
+                            {language}
+                        </span>
                     </div>
-                    <span className="text-xs bg-green-600/20 border border-green-500/30 text-green-400 px-3 py-1 rounded-full">
-                        {language}
-                    </span>
+
+                    {/* Title */}
+                    <h2 className="mt-3 text-white font-medium">{title}</h2>
                 </div>
 
-                {/* Title */}
-                <h2 className="mt-3 text-white font-medium">{title}</h2>
-            </div>
-
-            {/* Code Block */}
-            <div className="mx-5 mb-4 bg-gray-950 border border-gray-700 rounded-xl overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-2 bg-gray-800 border-b border-gray-700">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                    <span className="text-xs text-gray-500 ml-2">{language}</span>
+                {/* Code Block */}
+                <div className="mx-5 mb-4 bg-gray-950 border border-gray-700 rounded-xl overflow-hidden">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-gray-800 border-b border-gray-700">
+                        <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                        <span className="text-xs text-gray-500 ml-2">{language}</span>
+                    </div>
+                    <pre className="p-4 text-sm max-h-96 text-gray-300 font-mono overflow-x-auto">
+                        <code>{code}</code>
+                    </pre>
                 </div>
-                <pre className="p-4 text-sm max-h-96 text-gray-300 font-mono overflow-x-auto">
-                    <code>{code}</code>
-                </pre>
-            </div>
 
+            </div>
             {/* Actions */}
             <div className="px-5 py-3 border-t border-gray-700 flex items-center gap-6">
 

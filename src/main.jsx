@@ -11,6 +11,7 @@ import { AuthProvider } from './components/Context/AuthContext.jsx'
 import Feed from './components/Feed/Feed.jsx'
 import MyPosts from './components/MyPosts/MyPosts.jsx'
 import Profile from './components/Profile/Profile.jsx'
+import PostDetail from './components/PostDetail/PostDetail.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,8 +21,9 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />}>
         <Route index={true} element={<Feed />} />
-        <Route path='/dashboard/myposts' element={<MyPosts />} />
-        <Route path='/dashboard/profile' element={<Profile />} />
+        <Route path='myposts' element={<MyPosts />} />
+        <Route path='post/:postId' element={<PostDetail/>} />
+        <Route path='profile' element={<Profile />} />
       </Route>
     </Route>
   )
