@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Post from '../Feed/Post'
-import { doc, onSnapshot, collection, addDoc, serverTimestamp, updateDoc, increment } from 'firebase/firestore'
+import { doc, onSnapshot, collection, addDoc, serverTimestamp, updateDoc, increment, arrayRemove, arrayUnion } from 'firebase/firestore'
 import { db } from '../../firebase'
 import { useAuth } from '../Context/AuthContext'
 
@@ -47,6 +47,55 @@ export default function PostDetail() {
                 comments: increment(1)
             })
         }
+    }
+
+    async function handleCommentUpvote(commentId, upvotedBy, downvotedBy) {
+        const commentRef = doc(db, "posts", postId, "comments", commentId);
+
+        const alreadyUpvoted = upvotedBy?.includes(user.uid);
+        const alreadyDownvoted = downvotedBy?.includes(user.uid);
+
+        let updates = {};
+
+        if (alreadyUpvoted) {
+            updates.upvotes = increment(-1);
+            updates.upvotedBy = arrayRemove(user.uid);
+        } else {
+            updates.upvotes = increment(1);
+            updates.upvotedBy = arrayUnion(user.uid);
+
+            if (alreadyDownvoted) {
+                updates.downvotes = increment(-1);
+                updates.downvotedBy = arrayRemove(user.uid);
+            }
+        }
+
+        await updateDoc(commentRef, updates);
+    }
+
+    async function handleCommentDownvote(commentId , upvotedBy , downvotedBy) {
+        const commentRef = doc(db, "posts", postId ,"comments" ,commentId);
+
+        const alreadyDownvoted = downvotedBy?.includes(user.uid);
+        const alreadyUpvoted = upvotedBy?.includes(user.uid);
+
+        const updates = {}
+
+        if (alreadyDownvoted) {
+            updates.downvotes = increment(-1),
+                updates.downvotedBy = arrayRemove(user.uid)
+        }
+        else {
+            updates.downvotes = increment(1),
+                updates.downvotedBy = arrayUnion(user.uid)
+
+            if (alreadyUpvoted) {
+                updates.upvotes = increment(-1),
+                    updates.upvotedBy = arrayRemove(user.uid)
+            }
+        }
+        await updateDoc(commentRef, updates)
+
     }
 
     return (
@@ -116,16 +165,39 @@ export default function PostDetail() {
                                 <div className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-sm font-bold text-white shrink-0">
                                     {c.username?.charAt(0)}
                                 </div>
-                                <div className="flex-1 bg-[#0d1117] border border-[#30363d] rounded-md px-4 py-3">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <p className="text-white text-sm font-medium">{c.username}</p>
-                                        <p className="text-gray-500 text-xs">
-                                            {c.createdAt?.toDate().toLocaleDateString(undefined, {
-                                                year: 'numeric', month: 'short', day: 'numeric'
-                                            })}
-                                        </p>
+                                <div className='flex flex-col gap-3 w-full bg-[#0d1117] border border-[#30363d] rounded-md px-4 py-3'>
+                                    <div className="flex-1  rounded-md">
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <p className="text-white text-sm font-medium">{c.username}</p>
+                                            <p className="text-gray-500 text-xs">
+                                                {c.createdAt?.toDate().toLocaleDateString(undefined, {
+                                                    year: 'numeric', month: 'short', day: 'numeric'
+                                                })}
+                                            </p>
+                                        </div>
+                                        <p className="text-gray-300 text-sm leading-relaxed">{c.text}</p>
                                     </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed">{c.text}</p>
+                                    <div className=" flex items-start gap-4">
+
+                                        {/* Upvote */}
+                                        <button onClick={() => handleCommentUpvote(c.id, c.upvotedBy, c.downvotedBy)} className="flex items-center gap-1.5 text-gray-400 hover:text-green-400 transition text-sm">
+                                            <span>▲</span>
+                                            <span>{c.upvotes ? c.upvotes : "0"}</span>
+                                        </button>
+
+                                        {/* Downvote */}
+                                        <button onClick={()=>handleCommentDownvote(c.id , c.upvotedBy ,c.downvotedBy)} className="flex items-center gap-1.5 text-gray-400 hover:text-red-400 transition text-sm">
+                                            <span>▼</span>
+                                            <span>{c.downvotes ? c.downvotes : "0"}</span>
+                                        </button>
+
+                                        {/* Comments */}
+                                        <button className="flex items-center gap-1.5 text-gray-400 hover:text-blue-400 transition text-sm">
+
+                                            <span>Reply</span>
+                                        </button>
+
+                                    </div>
                                 </div>
                             </div>
                         ))}
