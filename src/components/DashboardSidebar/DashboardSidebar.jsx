@@ -49,7 +49,9 @@ export default function DashboardSidebar() {
           {/* Terminal */}
           <NavLink
           to={"terminal"}
-          className="w-full flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-500/20 text-gray-200 font-medium transition duration-200">
+          className={({ isActive }) =>
+              `${isActive ? "text-orange-400" : "text-white"} w-full flex items-center space-x-3 p-3 rounded-xl font-semibold transition hover:bg-gray-500/20`
+            }>
             <FaTerminal className="text-lg" />
             <span>Terminal</span>
           </NavLink>
