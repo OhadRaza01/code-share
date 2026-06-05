@@ -10,7 +10,7 @@ export default function DashboardNav() {
 
     return (
         <header className='sticky top-0 left-0 z-50'>
-            <nav className='flex justify-between items-center text-md p-4 bg-gray-950 border-b border-b-gray-700 text-white h-16'>
+            <nav className='flex justify-between items-center text-md p-4 bg-[#121111] border-b border-b-[#333] text-white h-16'>
                 <div className='flex justify-center items-center gap-3 cursor-pointer font-bold opacity-85 text-xl '>
                     <img src={logo} alt="Code share logo" width={24} className='invert md:w-7' />
                     Code Share

@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import { useAuth } from '../Context/AuthContext'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nightOwl } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
 export default function Post({ upvotedBy, downvotedBy, postId, char, name, time, language, title, code, upvotes, downvotes, comments }) {
 
     const { user } = useAuth()
@@ -57,7 +60,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
     }
 
     return (
-        <div className="bg-gray-900 border border-gray-700 rounded-md overflow-hidden hover:border-gray-600 transition-all duration-200">
+        <div className="bg-[#121111] border border-[#333] rounded-md overflow-hidden hover:border-gray-700 transition-all duration-200">
 
             {/* Header */}
             <Link to={`/dashboard/post/${postId}`} >
@@ -73,7 +76,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                                 <p className="text-xs text-gray-500">{time}</p>
                             </div>
                         </div>
-                        <span className="text-xs bg-green-600/20 border border-green-500/30 text-green-400 px-3 py-1 rounded-full">
+                        <span className="text-xs bg-orange-600/20 border border-orange-500/30 text-orange-400 px-3 py-1 rounded-full">
                             {language}
                         </span>
                     </div>
@@ -83,16 +86,25 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                 </div>
 
                 {/* Code Block */}
-                <div className="mx-5 mb-4 bg-gray-950 border border-gray-700 rounded-xl overflow-hidden">
-                    <div className="flex items-center gap-2 px-4 py-2 bg-gray-800 border-b border-gray-700">
+                <div className="mx-5 border border-[#2D2D2D] rounded-md overflow-hidden mb-2 bg-[#1A1A1A]">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-[#111827] border-b border-[#2D2D2D]">
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                        <span className="text-xs text-gray-500 ml-2">{language}</span>
+                        <span className="text-xs text-gray-300 ml-2">{language}</span>
                     </div>
-                    <pre className="p-4 text-sm max-h-96 text-gray-300 font-mono overflow-x-auto">
-                        <code>{code}</code>
-                    </pre>
+
+                    <SyntaxHighlighter
+                        language={language.toLowerCase()}
+                        style={nightOwl}
+                        customStyle={{
+                            background: '#0D0D0D',
+                            margin: 0,
+                            fontSize: '13px'
+                        }}
+                    >
+                        {code}
+                    </SyntaxHighlighter>
                 </div>
 
             </Link>

@@ -11,7 +11,7 @@ export default function Dashboard() {
     <>
       <AuthProvider>
         <DashboardNav />
-        <div className='flex flex-col md:flex-row gap-6 py-6 min-h-screen bg-gray-950'>
+        <div className='flex flex-col md:flex-row min-h-screen bg-[#000]'>
           <DashboardSidebar />
           <Outlet />
         </div>

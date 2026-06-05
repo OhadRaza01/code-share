@@ -29,8 +29,8 @@ export default function Feed() {
       <CreatePost />
 
       {/* Posts Feed */}
-      <div className="space-y-6">
-        <h1 className="text-md text-white font-medium pl-1">Feed</h1>
+      <div className="space-y-4">
+        <h1 className="text-md font-medium pl-1 text-orange-400">Feed</h1>
         {loading ? (
           <div className="text-gray-400 text-center py-10">Loading posts...</div>
         ) : (

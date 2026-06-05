@@ -25,7 +25,7 @@ export default function CreatePost() {
         })
     }
     return (
-        <div className="bg-gray-900 border border-gray-700 rounded-md p-5 mb-6">
+        <div className="bg-[#121111] border-x border-b border-[#333] rounded-md p-5 mb-6">
             <div className="flex items-start gap-4">
 
                 {/* Avatar */}
@@ -39,7 +39,7 @@ export default function CreatePost() {
                     <input
                         type="text"
                         placeholder="Post title..."
-                        className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-400"
+                        className="w-full border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-400"
                         onChange={(e) => {
                             setTitle(e.target.value)
                         }}
