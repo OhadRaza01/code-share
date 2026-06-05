@@ -68,7 +68,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                 <div className="p-5">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center font-bold text-sm">
+                            <div className="w-9 h-9 rounded-full text-white bg-green-600 flex items-center justify-center font-bold text-sm">
                                 {char}
                             </div>
                             <div>
