@@ -47,10 +47,12 @@ export default function DashboardSidebar() {
           </NavLink>
 
           {/* Terminal */}
-          <button className="w-full flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-500/20 text-gray-200 font-medium transition duration-200">
+          <NavLink
+          to={"terminal"}
+          className="w-full flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-500/20 text-gray-200 font-medium transition duration-200">
             <FaTerminal className="text-lg" />
             <span>Terminal</span>
-          </button>
+          </NavLink>
         </div>
       </div>
     </aside >

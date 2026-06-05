@@ -12,6 +12,7 @@ import Feed from './components/Feed/Feed.jsx'
 import MyPosts from './components/MyPosts/MyPosts.jsx'
 import Profile from './components/Profile/Profile.jsx'
 import PostDetail from './components/PostDetail/PostDetail.jsx'
+import Terminal from './pages/Terminal.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
         <Route path='myposts' element={<MyPosts />} />
         <Route path='post/:postId' element={<PostDetail/>} />
         <Route path='profile' element={<Profile />} />
+        <Route path='terminal' element={<Terminal/>} />
       </Route>
     </Route>
   )
