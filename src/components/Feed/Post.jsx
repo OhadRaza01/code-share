@@ -1,5 +1,5 @@
 import { arrayRemove, arrayUnion, doc, getDoc, increment, updateDoc } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { db } from '../../firebase'
 import { useAuth } from '../Context/AuthContext'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
@@ -10,6 +10,8 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
 
     const { user } = useAuth()
     const navigate = useNavigate()
+    const codeReference = useRef(null)
+
     async function handleUpvote() {
         const postRef = doc(db, "posts", postId);
 
@@ -59,6 +61,22 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
 
     }
 
+    const copyCodeToClipboard = () => {
+        const element = codeReference.current;
+
+        // selection banani hai
+        const range = document.createRange();
+        range.selectNodeContents(element);
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+        // copy bhi kar do
+        navigator.clipboard.writeText(code);
+    }
+
+
     return (
         <div className="bg-[#121111] border border-[#333] rounded-md overflow-hidden hover:border-gray-700 transition-all duration-200">
 
@@ -84,30 +102,39 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                     {/* Title */}
                     <h2 className="mt-3 text-white font-medium">{title}</h2>
                 </div>
+            </Link>
 
-                {/* Code Block */}
-                <div className="mx-5 border border-[#2D2D2D] rounded-md overflow-hidden mb-2 bg-[#1A1A1A]">
-                    <div className="flex items-center gap-2 px-4 py-2 bg-[#111827] border-b border-[#2D2D2D]">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                        <span className="text-xs text-gray-300 ml-2">{language}</span>
-                    </div>
-
-                    <SyntaxHighlighter
-                        language={language.toLowerCase()}
-                        style={nightOwl}
-                        customStyle={{
-                            background: '#0D0D0D',
-                            margin: 0,
-                            fontSize: '13px'
-                        }}
-                    >
-                        {code}
-                    </SyntaxHighlighter>
+            {/* Code Block */}
+            <div className="mx-5 border border-[#2D2D2D] rounded-md overflow-hidden mb-2 bg-[#1A1A1A]">
+                <div className="flex items-center justify-between gap-2 px-4 py-2 bg-[#111827] border-b border-[#2D2D2D]">
+                    <span className="text-xs text-gray-300">{language}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        onClick={copyCodeToClipboard}
+                        className="w-5 h-5 p-0.5 rounded-full text-gray-500 cursor-pointer hover:bg-gray-800 active:scale-90 transition-transform duration-150"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2m4 4h6a2 2 0 002-2v-8a2 2 0 00-2-2h-6a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
                 </div>
 
-            </Link>
+                <SyntaxHighlighter
+                    ref={codeReference}
+                    language={language.toLowerCase()}
+                    style={nightOwl}
+                    customStyle={{
+                        background: '#0D0D0D',
+                        margin: 0,
+                        fontSize: '13px'
+                    }}
+                >
+                    {code}
+                </SyntaxHighlighter>
+            </div>
+
             {/* Actions */}
             <div className="px-5 py-3 border-t border-gray-700 flex items-center gap-6">
 
