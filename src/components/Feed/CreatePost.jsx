@@ -78,7 +78,7 @@ export default function CreatePost() {
                                 <option value="Other" >Other</option>
                             </select>
 
-                            <button onClick={createPost} className="px-6 py-2 bg-orange-700 hover:bg-orange-800 cursor-pointer text-white text-sm font-medium rounded-xl transition active:scale-95">
+                            <button onClick={createPost} className="px-6 py-2 bg-orange-600 hover:bg-orange-700 cursor-pointer text-white text-sm font-medium rounded-xl transition active:scale-95">
                                 Post
                             </button>
 

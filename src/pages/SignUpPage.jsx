@@ -2,25 +2,23 @@ import React, { useEffect, useState } from 'react'
 import logo from "./../assets/logo.png"
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth'
 import EmailVerificationAlert from '../components/EmailVerificationAlert/EmailVerificationAlert'
-import { updateProfile } from 'firebase/auth'
 
 export default function SignUpPage() {
 
-  let [password, setPassword] = useState("")
-  let [passwordLength, setPasswordLength] = useState(0)
-  let [specialCharCheck, setSpecialCharCheck] = useState(false)
-  let [email, setEmail] = useState("")
-  let [error, setError] = useState("")
-  let [showPassword, setShowPassword] = useState(false)
-  let [registerSuccess, setRegisterSuccess] = useState(false)
-  let [username , setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordLength, setPasswordLength] = useState(0)
+  const [specialCharCheck, setSpecialCharCheck] = useState(false)
+  const [email, setEmail] = useState("")
+  const [error, setError] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [registerSuccess, setRegisterSuccess] = useState(false)
+  const [username, setUsername] = useState("")
 
   function checkSpecialCharacters(password) {
     const special_chars = ["!", "@", "#", "$", "%", "^", "*", "&"]
-    const hasSpecial = password.split('').some(chr => special_chars.includes(chr))
-    setSpecialCharCheck(hasSpecial)
+    setSpecialCharCheck(password.split('').some(chr => special_chars.includes(chr)))
   }
 
   useEffect(() => {
@@ -29,158 +27,163 @@ export default function SignUpPage() {
 
   async function handleSignUp() {
     try {
-      
-      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if(!username){
-        setError("Username is required")
-        return
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!username) { setError("Username is required"); return }
+      if (username.length <= 3) { setError("Username is too short"); return }
+      if (!email) { setError("Email is required"); return }
+      if (!regex.test(email)) { setError("Invalid email format"); return }
+      if (passwordLength < 8 || !specialCharCheck) {
+        setError("Password must be 8+ characters with a special character"); return
       }
-
-      if(username.length <= 3){
-        setError("Username is too Short")
-      }
-      if (!email) {
-        setError("Email is required")
-        return
-      }
-
-      if (!(regex.test(email))) {
-        setError("Invalid Email Format")
-        return
-      }
-
-
-      if (passwordLength >= 8 && specialCharCheck) {
-
-        let userCredential = await createUserWithEmailAndPassword(auth, email, password)
-        await sendEmailVerification(userCredential.user)
-        await updateProfile(userCredential.user , {
-          displayName : username
-        })
-        setRegisterSuccess(true)
-
-      }
-      else if (passwordLength < 8 || !specialCharCheck) {
-
-        setError("Password must be 8+ characters with a special character")
-
-      }
-    }
-    catch (err) {
-
-      if (err.code === 'auth/email-already-in-use') {
-        setError("This Email is already registered")
-      }
-      else {
-        setError(err.message)
-      }
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+      await sendEmailVerification(userCredential.user)
+      await updateProfile(userCredential.user, { displayName: username })
+      setRegisterSuccess(true)
+    } catch (err) {
+      setError(err.code === 'auth/email-already-in-use' ? "This email is already registered" : err.message)
     }
   }
 
   return (
-    <div className='relative bg-linear-to-br from-gray-950 via-gray-900 to-black text-sm md:text-md w-full h-screen text-white flex justify-center items-center px-4'>
+    <div className="relative min-h-screen bg-black text-white flex justify-center items-center px-4 overflow-hidden">
 
-      {registerSuccess && <EmailVerificationAlert message={"Registration successful! We have sent a verification link to your email. Please check your inbox and verify your email before logging in."
-      } />}
+      {/* Noise */}
+      <div
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize: "200px 200px",
+        }}
+      />
 
-      <div className='w-full max-w-md rounded-2xl bg-gray-900/80 backdrop-blur-lg border border-gray-800 shadow-xl p-6 space-y-5'>
+      {/* Glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at center, rgba(234,88,12,0.08) 0%, transparent 65%)" }}
+      />
 
-        {/* Logo and Title */}
-        <div className='flex flex-col justify-center items-center gap-2'>
-          <img src={logo} alt="logo" className='w-8 invert opacity-90' />
-          <h1 className='text-xl font-semibold tracking-wide'>Create an Account</h1>
-          <p className=' text-gray-400'>Join and start sharing code</p>
+      {registerSuccess && (
+        <EmailVerificationAlert message="Registration successful! We have sent a verification link to your email. Please check your inbox and verify your email before logging in." />
+      )}
+
+      {/* Card */}
+      <div className="relative z-10 w-full max-w-md bg-[#111] border border-[#1f1f1f] rounded-2xl p-7 space-y-5 shadow-2xl">
+
+        {/* Header */}
+        <div className="flex flex-col items-center gap-2 pb-1">
+          <div className="w-10 h-10 rounded-xl bg-orange-600/10 border border-orange-600/20 flex items-center justify-center mb-1">
+            <img src={logo} alt="logo" className="w-5 invert opacity-90" />
+          </div>
+          <h1
+            className="text-xl font-extrabold tracking-tight text-white"
+            style={{ fontFamily: "'Syne', sans-serif" }}
+          >
+            Create an Account
+          </h1>
+          <p className="font-mono text-[12px] text-gray-600">Join and start sharing code</p>
         </div>
 
-        <div className='space-y-1'>
-          <label className=' text-gray-300'>Username</label>
+        {/* Username */}
+        <div className="space-y-1.5">
+          <label className="font-mono text-[12px] text-gray-500 tracking-wide uppercase">Username</label>
           <input
-            type="username"
-            placeholder='username'
-            className='w-full bg-gray-800/70 border border-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition'
-            onChange={(e) => {
-              setUsername(e.target.value.trim())
-              setError("")
-            }}
-            required
+            type="text"
+            placeholder="your_username"
+            className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
+            onChange={(e) => { setUsername(e.target.value.trim()); setError("") }}
           />
         </div>
 
         {/* Email */}
-        <div className='space-y-1'>
-          <label className=' text-gray-300'>Email</label>
+        <div className="space-y-1.5">
+          <label className="font-mono text-[12px] text-gray-500 tracking-wide uppercase">Email</label>
           <input
             type="email"
-            placeholder='your@email.com'
-            className='w-full bg-gray-800/70 border border-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition'
-            onChange={(e) => {
-              setEmail(e.target.value.trim())
-              setError("")
-            }}
-            required
+            placeholder="your@email.com"
+            className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
+            onChange={(e) => { setEmail(e.target.value.trim()); setError("") }}
           />
-
         </div>
 
         {/* Password */}
-        <div className='space-y-1'>
-          <label className=' text-gray-300'>Password</label>
+        <div className="space-y-1.5">
+          <label className="font-mono text-[12px] text-gray-500 tracking-wide uppercase">Password</label>
           <input
             type={showPassword ? "text" : "password"}
-            placeholder='••••••••'
-            className='w-full bg-gray-800/70 border border-gray-700 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition'
-            onChange={(e) => {
-              setPassword(e.target.value)
-              setPasswordLength(e.target.value.length)
-              setError("")
-            }}
-
+            placeholder="••••••••"
+            className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
+            onChange={(e) => { setPassword(e.target.value); setPasswordLength(e.target.value.length); setError("") }}
           />
-          <div className='flex gap-3 p-1'>
-            <input id="showpass" type="checkbox"
-              className='accent-green-500 w-3.5 '
-              onChange={(e) => {
-                setShowPassword(!showPassword)
-              }}
+          <label className="flex items-center gap-2 cursor-pointer w-fit">
+            <input
+              type="checkbox"
+              className="accent-orange-600 w-3.5 h-3.5 cursor-pointer"
+              onChange={() => setShowPassword(!showPassword)}
             />
-            <label htmlFor="showpass" className='text-gray-400'>Show Password</label>
+            <span className="font-mono text-[11px] text-gray-600">Show password</span>
+          </label>
+        </div>
 
+        {/* Password checks */}
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <span className={`w-4 h-4 rounded-full border flex items-center justify-center transition-all duration-200 ${passwordLength >= 8 ? "bg-orange-600 border-orange-600" : "border-[#2a2a2a]"}`}>
+              {passwordLength >= 8 && (
+                <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5l2.5 2.5L8 3" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </span>
+            <span className={`font-mono text-[11px] transition-colors duration-200 ${passwordLength >= 8 ? "text-orange-500" : "text-gray-700"}`}>
+              At least 8 characters
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`w-4 h-4 rounded-full border flex items-center justify-center transition-all duration-200 ${specialCharCheck ? "bg-orange-600 border-orange-600" : "border-[#2a2a2a]"}`}>
+              {specialCharCheck && (
+                <svg width="8" height="8" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5l2.5 2.5L8 3" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
+            </span>
+            <span className={`font-mono text-[11px] transition-colors duration-200 ${specialCharCheck ? "text-orange-500" : "text-gray-700"}`}>
+              One special character
+            </span>
           </div>
         </div>
 
-        {/* error div  */}
-        {error && <div className=' w-full text-center text-md text-red-600 -mt-2' >{error}</div>}
-
-        <div className="space-y-2 ">
-
-          <div className="flex items-center gap-2 text-gray-400">
-            <span className={`w-5 h-5 flex items-center ${passwordLength >= 8 ? "bg-green-500 text-black" : ""} justify-center rounded-full border border-gray-600`}>
-              ✓
-            </span>
-            <p>At least 8 characters</p>
+        {/* Error */}
+        {error && (
+          <div className="w-full text-center font-mono text-xs text-red-500 bg-red-500/10 border border-red-500/20 rounded-lg py-2 px-3">
+            {error}
           </div>
+        )}
 
-          <div className="flex items-center gap-2 text-gray-400">
-            <span className={`w-5 h-5 flex items-center justify-center ${specialCharCheck ? "bg-green-500 text-black" : ""} rounded-full border border-gray-600`}>
-              ✓
-            </span>
-            <p>One special character</p>
-          </div>
-
-        </div>
-
-        <button onClick={handleSignUp} className='w-full bg-green-600 hover:bg-green-500 transition font-medium py-2.5 rounded-xl shadow-md'>
-          Sign Up
+        {/* Submit */}
+        <button
+          onClick={handleSignUp}
+          className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold tracking-wide transition-all duration-200 hover:shadow-[0_8px_24px_rgba(234,88,12,0.3)] active:scale-[0.98]"
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
+          Create Account
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10m0 0L8 3m5 5-5 5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
 
-        <p className='text-center text-gray-400'>
+        {/* Sign in link */}
+        <p className="text-center font-mono text-[12px] text-gray-600">
           Already have an account?{" "}
-          <Link to="/login" className='text-green-500 hover:underline'>
+          <Link to="/login" className="text-orange-500 hover:text-orange-400 transition-colors duration-200">
             Sign in
           </Link>
         </p>
 
       </div>
+
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+      `}</style>
     </div>
   )
 }

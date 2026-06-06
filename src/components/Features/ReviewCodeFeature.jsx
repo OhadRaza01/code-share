@@ -1,98 +1,129 @@
 import React from "react";
 import FeatureNumber from "./FeatureNumber";
-import { Link } from "react-router-dom";
 
 export default function ReviewCodeFeature() {
-    return (
-        <section>
+  return (
+    <section className="relative min-h-screen bg-black text-white flex items-center px-6 py-20 md:px-16 overflow-hidden">
 
-            <div className="relative  min-h-[calc(100vh-72px)] bg-gray-950 text-white flex flex-col md:flex-row gap-10 justify-center items-center p-5 md:p-10 mt-10 md:mt-0 ">
+      {/* Noise texture */}
+      <div
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize: "200px 200px",
+        }}
+      />
 
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(34,197,94,0.08),transparent_60%)]" />
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-size[40px_40px]" />
+      {/* Orange glow — right */}
+      <div
+        className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at center, rgba(234,88,12,0.1) 0%, transparent 70%)",
+        }}
+      />
 
-                <div className="flex flex-col gap-6">
+      {/* Same equal two-column grid as ShareCodeFeature */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
 
-                    <FeatureNumber number={2} />
+        {/* Left — Feature number + Review card */}
+        <div className="flex flex-col gap-6">
 
-                    {/* review card  */}
-                    <div className="flex-1 w-full lg:w-2xl z-10">
-                        <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 p-5">
+          <FeatureNumber number={2} />
 
-                            {/* Review Card */}
-                            <div className="space-y-3">
-                                {/* Reviewer Info */}
-                                <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-green-600/20 flex items-center justify-center text-green-400 text-sm font-medium">
-                                        O
-                                    </div>
-                                    <div>
-                                        <p className="text-white text-sm font-medium">Ohad Raza</p>
-                                        <div className="flex items-center gap-1">
-                                            <span className="text-xs text-green-400">⭐⭐⭐⭐⭐</span>
-                                            <span className="text-xs text-gray-500">• Junior Dev</span>
-                                        </div>
-                                    </div>
-                                </div>
+          {/* Review Card */}
+          <div className="w-full bg-[#111] border border-[#1f1f1f] rounded-xl p-5 hover:border-orange-600/20 hover:shadow-[0_0_40px_rgba(234,88,12,0.06)] transition-all duration-300">
+            <div className="space-y-4">
 
-                                {/* Review Text */}
-                                <p className="text-gray-300 text-sm leading-relaxed">
-                                    "Clean code! 🎉 Just add <span className="text-green-400">error handling</span> for the API call."
-                                </p>
-
-                                {/* Suggestion Box */}
-                                <div className="bg-gray-950 rounded-lg p-3 border-l-2 border-green-500">
-                                    <code className="text-xs text-gray-400 font-mono">
-                                        try &#123; <br />
-                                        &nbsp;&nbsp;await fetchData() <br />
-                                        &#125; catch(err) &#123; <br />
-                                        &nbsp;&nbsp;console.error(err) <br />
-                                        &#125;
-                                    </code>
-                                </div>
-
-                                {/* Helpful Button */}
-                                <button className="text-xs text-gray-500 hover:text-green-400 transition">
-                                    👍 Helpful (8)
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+              {/* Reviewer info */}
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-9 h-9 rounded-full bg-orange-600/15 border border-orange-600/20 flex items-center justify-center text-orange-500 text-sm font-bold shrink-0"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
+                >
+                  O
                 </div>
-
-
-                <div className="flex flex-col gap-3 md:gap-5 w-full max-w-xl">
-                    <h1 className="text-3xl md:text-5xl font-medium">Get <span className="text-green-500">Quality Reviews</span></h1>
-
-                    <p>
-                        Receive constructive feedback from experienced developers.
-                        Learn best practices, improve code quality, and write cleaner
-                        code with actionable suggestions.
-                    </p>
-                    <ul className="space-y-3 mb-4">
-                        <li className="text-gray-300 text-sm md:text-base flex items-center gap-2 ">
-                            <span className="text-green-500">•</span>
-                            <span>Detailed code reviews within hours</span>
-                        </li>
-                        <li className="text-gray-300 text-sm md:text-base flex items-center gap-2 ">
-                            <span className="text-green-500">•</span>
-                            <span>Suggestions with real code examples</span>
-                        </li>
-                        <li className="text-gray-300 text-sm md:text-base flex items-center gap-2">
-                            <span className="text-green-500">•</span>
-                            <span>Build reputation with quality contributions</span>
-                        </li>
-                    </ul>
-
-                    {/* <Link to="/signup"
-                        className="w-44 bg-green-600 hover:bg-green-700 cursor-pointer text-white font-medium active:scale-95 transition-all duration-200 rounded-xl px-6 py-3">
-                        Start Sharing
-
-                    </Link> */}
-
+                <div>
+                  <p className="text-white text-sm font-semibold">Ohad Raza</p>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs text-orange-500 tracking-wide">★★★★★</span>
+                    <span className="text-xs text-gray-700 font-mono">· Junior Dev</span>
+                  </div>
                 </div>
+              </div>
 
+              {/* Review text */}
+              <p className="text-gray-500 font-mono text-sm leading-relaxed">
+                "Clean code! Just add{" "}
+                <span className="text-orange-400">error handling</span>{" "}
+                for the API call."
+              </p>
+
+              {/* Code suggestion */}
+              <div className="bg-black rounded-lg p-4 border-l-2 border-orange-600 border-t border-r border-b border-[#1f1f1f]">
+                <code className="font-mono text-xs text-gray-500 leading-6">
+                  <span className="text-purple-400">try</span>{" "}
+                  <span className="text-gray-400">{"{"}</span>
+                  <br />
+                  &nbsp;&nbsp;<span className="text-blue-400">await</span>{" "}
+                  <span className="text-gray-300">fetchData()</span>
+                  <br />
+                  <span className="text-gray-400">{"}"}</span>{" "}
+                  <span className="text-purple-400">catch</span>
+                  <span className="text-gray-400">(err) {"{"}</span>
+                  <br />
+                  &nbsp;&nbsp;<span className="text-gray-300">console</span>
+                  <span className="text-gray-400">.</span>
+                  <span className="text-blue-400">error</span>
+                  <span className="text-gray-400">(err)</span>
+                  <br />
+                  <span className="text-gray-400">{"}"}</span>
+                </code>
+              </div>
+
+              {/* Helpful button */}
+              <button className="font-mono text-xs text-gray-700 hover:text-orange-500 transition-colors duration-200">
+                👍 Helpful (8)
+              </button>
             </div>
-        </section>
-    );
+          </div>
+        </div>
+
+        {/* Right — Text */}
+        <div className="flex flex-col gap-5">
+
+          <h2
+            className="text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.03em]"
+            style={{ fontFamily: "'Syne', sans-serif" }}
+          >
+            Get{" "}
+            <span className="text-orange-600">Quality</span>
+            <br />
+            <span className="text-orange-600">Reviews</span>
+          </h2>
+
+          <p className="text-gray-400 font-mono text-[14px] leading-relaxed">
+            Receive constructive feedback from experienced developers. Learn best practices, improve code quality, and write cleaner code with actionable suggestions.
+          </p>
+
+          <ul className="space-y-3">
+            {[
+              "Detailed code reviews within hours",
+              "Suggestions with real code examples",
+              "Build reputation with quality contributions",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm font-mono text-gray-500">
+                <span className="mt-[6px] w-1.5 h-1.5 rounded-full bg-orange-600 shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </div>
+
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+      `}</style>
+    </section>
+  );
 }

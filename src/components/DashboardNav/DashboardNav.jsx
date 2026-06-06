@@ -6,14 +6,19 @@ import { useAuth } from '../Context/AuthContext'
 
 export default function DashboardNav() {
 
-    const {user} = useAuth()
+    const { user } = useAuth()
 
     return (
         <header className='sticky top-0 left-0 z-50'>
-            <nav className='flex justify-between items-center text-md p-4 bg-[#121111] border-b border-b-[#333] text-white h-16'>
-                <div className='flex justify-center items-center gap-3 cursor-pointer font-bold opacity-85 text-xl '>
-                    <img src={logo} alt="Code share logo" width={24} className='invert md:w-7' />
-                    Code Share
+            <nav className='flex justify-between items-center text-md p-4 bg-[#121111]  border-b border-b-[#333] text-white h-16'>
+                <div className="flex items-center gap-2">
+                    <img src={logo} alt="CodeShare logo" width={22} className="invert opacity-90" />
+                    <span
+                        className="text-white font-extrabold text-lg tracking-tight"
+                        style={{ fontFamily: "'Syne', sans-serif" }}
+                    >
+                        Code<span className="text-orange-600">Share</span>
+                    </span>
                 </div>
                 <div className='md:hidden text-2xl'>
                     &#9776;
@@ -26,7 +31,7 @@ export default function DashboardNav() {
                     />
 
                     <NavLink to="/dashboard/profile">
-                        
+
                         <div className='w-8 h-8 rounded-full bg-green-600 flex justify-center items-center font-bold text-sm'>
                             {user.displayName.charAt(0)}
                         </div>
