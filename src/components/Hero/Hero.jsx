@@ -22,15 +22,14 @@ export default function Hero() {
       />
 
       {/* Badge */}
-      <div className="relative z-10 inline-flex items-center gap-2 mb-8 px-3 py-1.5 rounded border border-orange-600/30 bg-orange-600/[0.07] text-orange-400 font-mono text-[11px] font-medium tracking-widest [animation:heroUp_0.5s_ease_both] [animation-fill-mode:both]">
+      {/* <div className="relative z-10 inline-flex items-center gap-2 mb-8 px-3 py-1.5 rounded border border-orange-600/30 bg-orange-600/[0.07] text-orange-400 font-mono text-[11px] font-medium tracking-widest [animation:heroUp_0.5s_ease_both] [animation-fill-mode:both]">
         <span className="w-1.25 h-1.25 rounded-full bg-orange-600 animate-pulse" />
         JOIN FREE
-      </div>
+      </div> */}
 
       {/* Headline */}
       <h1
         className="relative z-10 font-extrabold text-white leading-none tracking-[-0.035em] text-[clamp(2.8rem,7vw,5rem)] max-w-225 [animation:heroUp_0.5s_0.08s_ease_both] [animation-fill-mode:both]"
-        style={{ fontFamily: "'Syne', sans-serif" }}
       >
         Code Shared.
         <br />
@@ -51,7 +50,6 @@ export default function Hero() {
         <Link
           to="/signup"
           className="flex items-center gap-2 px-7 py-3.5 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold  transition-all duration-200  active:scale-[0.97]"
-          style={{ fontFamily: "'Syne', sans-serif" }}
         >
           Start sharing
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -67,7 +65,6 @@ export default function Hero() {
 
         <button
           className="px-6 py-3.5 rounded-md bg-transparent border border-[#1f1f1f] hover:border-gray-700 text-gray-500 hover:text-gray-300 text-sm font-semibold transition-all duration-200 active:scale-[0.97]"
-          style={{ fontFamily: "'Syne', sans-serif" }}
         >
           Browse snippets
         </button>

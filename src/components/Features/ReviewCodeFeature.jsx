@@ -38,7 +38,6 @@ export default function ReviewCodeFeature() {
               <div className="flex items-center gap-3">
                 <div
                   className="w-9 h-9 rounded-full bg-orange-600/15 border border-orange-600/20 flex items-center justify-center text-orange-500 text-sm font-bold shrink-0"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
                 >
                   O
                 </div>
@@ -93,7 +92,6 @@ export default function ReviewCodeFeature() {
 
           <h2
             className="text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.03em]"
-            style={{ fontFamily: "'Syne', sans-serif" }}
           >
             Get{" "}
             <span className="text-orange-600">Quality</span>

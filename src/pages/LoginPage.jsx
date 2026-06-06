@@ -115,7 +115,6 @@ export default function LoginPage() {
                 <button
                     onClick={handleSignIn}
                     className="w-full flex items-center justify-center gap-2 py-3 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold transition-all duration-200  active:scale-[0.98]"
-                    style={{ fontFamily: "'Syne', sans-serif" }}
                 >
                     Sign In
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none">

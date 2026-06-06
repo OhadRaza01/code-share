@@ -141,6 +141,7 @@ export default function Terminal() {
                                 extensions={[getExtension(language)]}
                                 onChange={(val) => setInput(val)}
                                 style={{ fontSize: '14px', height: '100%' }}
+                                placeholder="//Write your code here"
                             />
                         </div>
 

@@ -33,7 +33,6 @@ export default function ShareCodeFeature() {
           <div className="flex flex-col gap-4">
             <h2
               className="text-4xl md:text-5xl font-extrabold leading-none tracking-[-0.03em] text-white"
-              style={{ fontFamily: "'Syne', sans-serif" }}
             >
               Share your code{" "}
               <span className="text-orange-600">Instantly</span>
@@ -46,7 +45,6 @@ export default function ShareCodeFeature() {
             <Link
               to="/signup"
               className="w-fit flex items-center gap-2 px-6 py-3 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold transition-all duration-200 active:scale-[0.97]"
-              style={{ fontFamily: "'Syne', sans-serif" }}
             >
               Start Sharing
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">

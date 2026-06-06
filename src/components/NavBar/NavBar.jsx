@@ -12,8 +12,7 @@ export default function NavBar() {
                     <div className="flex items-center gap-2">
                         <img src={logo} alt="CodeShare logo" width={22} className="invert opacity-90" />
                         <span
-                            className="text-white font-extrabold text-lg tracking-tight"
-                            style={{ fontFamily: "'Syne', sans-serif" }}
+                            className="text-white font-extrabold text-2xl tracking-tight"
                         >
                             Code<span className="text-orange-600">Share</span>
                         </span>

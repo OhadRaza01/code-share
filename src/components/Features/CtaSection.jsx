@@ -38,7 +38,6 @@ export default function CtaSection() {
                     {/* Heading */}
                     <h2
                         className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-none tracking-[-0.03em] mb-4"
-                        style={{ fontFamily: "'Syne', sans-serif" }}
                     >
                         Ready to share
                         <br />
@@ -58,7 +57,6 @@ export default function CtaSection() {
                         <Link
                             to="/signup"
                             className="w-full sm:w-fit flex items-center justify-center gap-2 px-8 py-3.5 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold transition-all duration-200 active:scale-[0.97]"
-                            style={{ fontFamily: "'Syne', sans-serif" }}
                         >
                             Get Started — It's Free
                             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -69,7 +67,6 @@ export default function CtaSection() {
                         <Link
                             to="/explore"
                             className="w-full sm:w-fit flex items-center justify-center gap-2 px-6 py-3.5 rounded-[6px] bg-transparent border border-[#1f1f1f] hover:border-gray-700 text-gray-500 hover:text-gray-300 text-sm font-semibold tracking-wide transition-all duration-200 active:scale-[0.97]"
-                            style={{ fontFamily: "'Syne', sans-serif" }}
                         >
                             Browse snippets
                         </Link>
@@ -83,9 +80,7 @@ export default function CtaSection() {
                 </div>
             </div>
 
-            <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-      `}</style>
+            
         </section>
     );
 }

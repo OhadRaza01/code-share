@@ -76,16 +76,15 @@ export default function SignUpPage() {
           </div>
           <h1
             className="text-xl font-extrabold tracking-tight text-white"
-            style={{ fontFamily: "'Syne', sans-serif" }}
           >
             Create an Account
           </h1>
-          <p className="font-mono text-[12px] text-gray-600">Join and start sharing code</p>
+          <p className="font-mono text-[12px] text-gray-400">Join and start sharing code</p>
         </div>
 
         {/* Username */}
         <div className="space-y-1.5">
-          <label className="font-mono text-[12px] text-gray-500 tracking-wide uppercase">Username</label>
+          <label className="font-mono text-[12px] text-gray-400 tracking-wide uppercase">Username</label>
           <input
             type="text"
             placeholder="your_username"
@@ -96,7 +95,7 @@ export default function SignUpPage() {
 
         {/* Email */}
         <div className="space-y-1.5">
-          <label className="font-mono text-[12px] text-gray-500 tracking-wide uppercase">Email</label>
+          <label className="font-mono text-[12px] text-gray-400 tracking-wide uppercase">Email</label>
           <input
             type="email"
             placeholder="your@email.com"
@@ -120,7 +119,7 @@ export default function SignUpPage() {
               className="accent-orange-600 w-3.5 h-3.5 cursor-pointer"
               onChange={() => setShowPassword(!showPassword)}
             />
-            <span className="font-mono text-[11px] text-gray-600">Show password</span>
+            <span className="font-mono text-[11px] text-gray-400">Show password</span>
           </label>
         </div>
 
@@ -134,7 +133,7 @@ export default function SignUpPage() {
                 </svg>
               )}
             </span>
-            <span className={`font-mono text-[11px] transition-colors duration-200 ${passwordLength >= 8 ? "text-orange-500" : "text-gray-700"}`}>
+            <span className={`font-mono text-[11px] transition-colors duration-200 ${passwordLength >= 8 ? "text-orange-500" : "text-gray-500"}`}>
               At least 8 characters
             </span>
           </div>
@@ -146,7 +145,7 @@ export default function SignUpPage() {
                 </svg>
               )}
             </span>
-            <span className={`font-mono text-[11px] transition-colors duration-200 ${specialCharCheck ? "text-orange-500" : "text-gray-700"}`}>
+            <span className={`font-mono text-[11px] transition-colors duration-200 ${specialCharCheck ? "text-orange-500" : "text-gray-500"}`}>
               One special character
             </span>
           </div>
@@ -163,7 +162,6 @@ export default function SignUpPage() {
         <button
           onClick={handleSignUp}
           className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold tracking-wide transition-all duration-200 hover:shadow-[0_8px_24px_rgba(234,88,12,0.3)] active:scale-[0.98]"
-          style={{ fontFamily: "'Syne', sans-serif" }}
         >
           Create Account
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -172,7 +170,7 @@ export default function SignUpPage() {
         </button>
 
         {/* Sign in link */}
-        <p className="text-center font-mono text-[12px] text-gray-600">
+        <p className="text-center font-mono text-[12px] text-gray-400">
           Already have an account?{" "}
           <Link to="/login" className="text-orange-500 hover:text-orange-400 transition-colors duration-200">
             Sign in
