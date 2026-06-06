@@ -69,12 +69,10 @@ export default function Terminal() {
 
     return (
         <main className="flex-1">
-            <PanelGroup direction="horizontal" className="h-[calc(100vh-100px)] rounded-lg overflow-hidden border border-[#333]" style={{ background: '#000' }}>
-
-
+            <PanelGroup direction="horizontal" className="h-[calc(100vh-100px)] overflow-hidden border border-[#333] bg-black">
 
                 {/* Left Sidebar — Languages */}
-                <Panel defaultSize={15} minSize={10} maxSize={25}>
+                <Panel defaultSize={15} minSize={10} maxSize={20}>
                     {/* sidebar content */}
                     <div className="w-full shrink-0 flex flex-col border-r border-[#333]" style={{ background: '#0a0a0a' }}>
                         <div className="px-4 py-3 border-b border-[#333]">
