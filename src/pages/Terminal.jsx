@@ -69,7 +69,7 @@ export default function Terminal() {
 
     return (
         <main className="flex-1">
-            <PanelGroup direction="horizontal" className="h-[calc(100vh-100px)] overflow-hidden border border-[#333] bg-black">
+            <PanelGroup direction="horizontal" className="h-[calc(100vh-64px)] overflow-hidden border border-[#333] bg-black">
 
                 <Panel defaultSize={15} minSize={10} maxSize={20}>
                     
@@ -153,7 +153,7 @@ export default function Terminal() {
                 {/* Output */}
                 <Panel defaultSize={30} minSize={15}>
                     <div className="w-full h-full shrink-0 flex flex-col" style={{ background: '#0a0a0a' }}>
-                        <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#333]">
+                        <div className="flex overflow-y-auto items-center justify-between px-4 py-2.5 border-b border-[#333]">
 
                             <span className="text-[11px] text-[#bebebe] font-mono">output</span>
                         </div>

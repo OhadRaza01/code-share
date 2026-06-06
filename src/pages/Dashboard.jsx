@@ -12,7 +12,7 @@ export default function Dashboard() {
     <>
       <AuthProvider>
         <DashboardNav />
-        <div className='flex flex-col md:flex-row min-h-screen bg-black'>
+        <div className='flex flex-col md:flex-row min-h-[calc(100vh-64px)] bg-black'>
           <DashboardSidebar />
           <Outlet />
         </div>
