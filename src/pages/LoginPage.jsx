@@ -11,6 +11,7 @@ export default function LoginPage() {
     const [error, setError] = useState("")
     const [showPassword, setShowPassword] = useState(false)
     const [emailNotVerified, setEmailNotVerified] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -21,10 +22,13 @@ export default function LoginPage() {
             if (!regex.test(email)) { setError("Invalid email format"); return }
             if (!password) { setError("Password is required"); return }
 
+            setLoading(true)
             const userCredential = await signInWithEmailAndPassword(auth, email, password)
             if (userCredential.user.emailVerified) {
+                setLoading(false)
                 navigate('/dashboard')
             } else {
+                setLoading(false)
                 setEmailNotVerified(true)
                 await sendEmailVerification(userCredential.user)
             }
@@ -116,10 +120,23 @@ export default function LoginPage() {
                     onClick={handleSignIn}
                     className="w-full flex items-center justify-center gap-2 py-3 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold transition-all duration-200  active:scale-[0.98]"
                 >
-                    Sign In
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 8h10m0 0L8 3m5 5-5 5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    {loading ? (
+                        <>
+                            <svg className="animate-spin w-3 h-3" viewBox="0 0 24 24" fill="none">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                            </svg>
+                            Signing in
+                        </>
+                    ) :
+                        <>
+                            <span>Sign In</span>
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                                <path d="M3 8h10m0 0L8 3m5 5-5 5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </>
+                    }
+
                 </button>
 
                 {/* Sign up link */}
