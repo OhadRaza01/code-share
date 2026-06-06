@@ -4,12 +4,10 @@ import logo from "../../assets/logo.png"
 export default function Footer() {
   return (
     <footer className="bg-[#121111] border-t border-[#1f1f1f]">
-      <div className="max-w-6xl mx-auto px-6 md:px-16 py-10 flex flex-col gap-8">
+      <div className="max-w-6xl mx-auto px-6  md:px-0 py-10 flex flex-col gap-8">
 
-        {/* Top row */}
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
 
-          {/* Brand */}
           <a href="/" className="flex flex-col items-center md:items-start gap-2">
             <div className="flex items-center gap-2">
               <img src={logo} alt="CodeShare logo" width={22} className="invert opacity-90" />
