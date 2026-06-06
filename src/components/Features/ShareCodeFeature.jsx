@@ -38,13 +38,13 @@ export default function ShareCodeFeature() {
               <span className="text-orange-600">Instantly</span>
             </h2>
 
-            <p className="text-gray-400 font-mono text-[14px] leading-relaxed">
+            <p className="text-gray-400 font-mono text-xs md:text-sm lg:text-md leading-relaxed">
               Post snippets with syntax highlighting. Share your solutions, experiments, and projects with the community.
             </p>
 
             <Link
               to="/signup"
-              className="w-fit flex items-center gap-2 px-6 py-3 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold transition-all duration-200 active:scale-[0.97]"
+              className="w-fit flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold transition-all duration-200 active:scale-[0.97]"
             >
               Start Sharing
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -56,27 +56,22 @@ export default function ShareCodeFeature() {
 
         {/* Right — Code card */}
         <div className="w-full">
-          <div className="bg-[#111] border border-[#1f1f1f] rounded-xl overflow-hidden transition-all duration-300 hover:border-orange-600/20 hover:shadow-[0_0_40px_rgba(234,88,12,0.06)]">
+          <div className="bg-[#111] border border-[#1f1f1f] rounded-md overflow-hidden transition-all duration-300 hover:border-orange-600/20 hover:shadow-[0_0_40px_rgba(234,88,12,0.06)]">
 
             {/* Card top bar */}
-            <div className="flex items-center justify-between px-4 py-3 bg-[#0d0d0d] border-b border-[#1f1f1f]">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                <div className="w-3 h-3 rounded-full bg-orange-500/70" />
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs text-gray-600">main.jsx</span>
-                <span className="font-mono text-xs bg-orange-600/15 text-orange-500 px-2 py-0.5 rounded-[4px] border border-orange-600/20">
+            <div className="flex items-center justify-between px-3 py-3 bg-[#0d0d0d] border-b border-[#1f1f1f]">
+              
+              <div className="flex justify-between w-full">
+                <div className="font-mono text-xs text-gray-600">main.jsx</div>
+                <div className="font-mono text-xs md:text-sm bg-orange-600/15 text-orange-500 px-1 rounded-sm border border-orange-600/20">
                   JavaScript
-                </span>
+                </div>
               </div>
-              <div className="w-16" />
             </div>
 
             {/* Code body */}
             <div className="p-5 md:p-7 font-mono text-sm leading-7">
-              <div className="space-y-0.5">
+              <div className="space-y-0.5 text-xs md:text-sm lg:text-md">
                 <div className="flex gap-4">
                   <span className="text-gray-700 select-none w-6 text-right shrink-0">1</span>
                   <span><span className="text-purple-400">import</span><span className="text-gray-300"> React </span><span className="text-purple-400">from</span><span className="text-orange-400"> 'react'</span><span className="text-gray-600">;</span></span>

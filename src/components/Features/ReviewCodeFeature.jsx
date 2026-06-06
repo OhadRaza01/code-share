@@ -31,7 +31,7 @@ export default function ReviewCodeFeature() {
           <FeatureNumber number={2} />
 
           {/* Review Card */}
-          <div className="w-full bg-[#111] border border-[#1f1f1f] rounded-xl p-5 hover:border-orange-600/20 hover:shadow-[0_0_40px_rgba(234,88,12,0.06)] transition-all duration-300">
+          <div className="w-full bg-[#111] border border-[#1f1f1f] rounded-md p-5 hover:border-orange-600/20 hover:shadow-[0_0_40px_rgba(234,88,12,0.06)] transition-all duration-300">
             <div className="space-y-4">
 
               {/* Reviewer info */}
@@ -51,15 +51,15 @@ export default function ReviewCodeFeature() {
               </div>
 
               {/* Review text */}
-              <p className="text-gray-500 font-mono text-sm leading-relaxed">
+              <p className="text-gray-500 font-mono text-xs md:text-sm lg:text-md leading-relaxed">
                 "Clean code! Just add{" "}
                 <span className="text-orange-400">error handling</span>{" "}
                 for the API call."
               </p>
 
               {/* Code suggestion */}
-              <div className="bg-black rounded-lg p-4 border-l-2 border-orange-600 border-t border-r border-b border-[#1f1f1f]">
-                <code className="font-mono text-xs text-gray-500 leading-6">
+              <div className="bg-black rounded-md p-4 border-l-2 border-orange-600/40 border-t border-r border-b">
+                <code className="font-mono text-xs md:text-sm lg:text-md text-gray-500 leading-6">
                   <span className="text-purple-400">try</span>{" "}
                   <span className="text-gray-400">{"{"}</span>
                   <br />
@@ -80,7 +80,7 @@ export default function ReviewCodeFeature() {
               </div>
 
               {/* Helpful button */}
-              <button className="font-mono text-xs text-gray-700 hover:text-orange-500 transition-colors duration-200">
+              <button className="font-mono text-xs text-gray-600 hover:text-orange-500 transition-colors duration-200">
                 👍 Helpful (8)
               </button>
             </div>
@@ -99,7 +99,7 @@ export default function ReviewCodeFeature() {
             <span className="text-orange-600">Reviews</span>
           </h2>
 
-          <p className="text-gray-400 font-mono text-[14px] leading-relaxed">
+          <p className="text-gray-500 font-mono text-xs md:text-sm lg:text-md leading-relaxed">
             Receive constructive feedback from experienced developers. Learn best practices, improve code quality, and write cleaner code with actionable suggestions.
           </p>
 
@@ -109,8 +109,8 @@ export default function ReviewCodeFeature() {
               "Suggestions with real code examples",
               "Build reputation with quality contributions",
             ].map((item) => (
-              <li key={item} className="flex items-start gap-3 text-sm font-mono text-gray-500">
-                <span className="mt-[6px] w-1.5 h-1.5 rounded-full bg-orange-600 shrink-0" />
+              <li key={item} className="flex items-start gap-3 text-xs md:text-sm lg:text-md font-mono text-gray-500">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-orange-600 shrink-0" />
                 {item}
               </li>
             ))}
@@ -118,10 +118,6 @@ export default function ReviewCodeFeature() {
         </div>
 
       </div>
-
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-      `}</style>
     </section>
   );
 }

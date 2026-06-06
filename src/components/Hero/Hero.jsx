@@ -29,7 +29,7 @@ export default function Hero() {
 
       {/* Headline */}
       <h1
-        className="relative z-10 font-extrabold text-white leading-none tracking-[-0.035em] text-[clamp(2.8rem,7vw,5rem)] max-w-225 [animation:heroUp_0.5s_0.08s_ease_both] [animation-fill-mode:both]"
+        className="relative z-10 font-extrabold text-white leading-none tracking-[-0.035em] text-5xl md:text-6xl lg:text-7xl max-w-225 [animation:heroUp_0.5s_0.08s_ease_both] [animation-fill-mode:both]"
       >
         Code Shared.
         <br />
@@ -39,7 +39,7 @@ export default function Hero() {
       </h1>
 
       {/* Subtext */}
-      <p className="relative z-10 mt-5 text-gray-400 font-mono text-[15px] leading-[1.8] max-w-100 [animation:heroUp_0.5s_0.16s_ease_both] [animation-fill-mode:both]">
+      <p className="relative z-10 mt-5 text-gray-500 font-mono text-xs md:text-sm lg:text-md leading-[1.8] max-w-100 [animation:heroUp_0.5s_0.16s_ease_both] [animation-fill-mode:both]">
         Post snippets. Get real feedback.
         <br />
         Level up with a community that ships.
@@ -49,7 +49,7 @@ export default function Hero() {
       <div className="relative z-10 flex items-center gap-3 mt-10 [animation:heroUp_0.5s_0.24s_ease_both] [animation-fill-mode:both]">
         <Link
           to="/signup"
-          className="flex items-center gap-2 px-7 py-3.5 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold  transition-all duration-200  active:scale-[0.97]"
+          className="flex items-center gap-2 px-5 py-2.5 md:py-3 md:px-6 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold  transition-all duration-200  active:scale-[0.97]"
         >
           Start sharing
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -64,7 +64,7 @@ export default function Hero() {
         </Link>
 
         <button
-          className="px-6 py-3.5 rounded-md bg-transparent border border-[#1f1f1f] hover:border-gray-700 text-gray-500 hover:text-gray-300 text-sm font-semibold transition-all duration-200 active:scale-[0.97]"
+          className="px-6 py-3 rounded-md bg-transparent border border-[#1f1f1f] hover:border-gray-700 text-gray-500 hover:text-gray-300 text-sm font-semibold transition-all duration-200 active:scale-[0.97]"
         >
           Browse snippets
         </button>

@@ -100,7 +100,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                     </div>
 
                     {/* Title */}
-                    <h2 className="mt-3 text-white font-medium">{title}</h2>
+                    <h2 className="mt-3 text-white font-medium text-sm md:text-md">{title}</h2>
                 </div>
             </Link>
 
@@ -130,6 +130,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
                         margin: 0,
                         fontSize: '13px'
                     }}
+                    className="text-sm md:text-md"
                 >
                     {code}
                 </SyntaxHighlighter>

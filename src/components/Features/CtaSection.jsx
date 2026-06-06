@@ -24,7 +24,7 @@ export default function CtaSection() {
 
             {/* Card */}
             <div className="relative z-10 w-full max-w-3xl">
-                <div className="bg-[#111] border border-[#1f1f1f] rounded-2xl p-7 md:p-10 text-center hover:border-orange-600/20 hover:shadow-[0_0_60px_rgba(234,88,12,0.07)] transition-all duration-300">
+                <div className="bg-[#111] border border-[#1f1f1f] rounded-md p-7 md:p-10 text-center hover:border-orange-600/20 hover:shadow-[0_0_60px_rgba(234,88,12,0.07)] transition-all duration-300">
 
                     {/* Icon */}
                     <div className="flex justify-center mb-5">
@@ -45,7 +45,7 @@ export default function CtaSection() {
                     </h2>
 
                     {/* Subtext */}
-                    <p className="text-gray-400 font-mono text-sm md:text-[15px] leading-relaxed max-w-lg mx-auto mb-6">
+                    <p className="text-gray-500 font-mono text-xs md:text-sm lg:text-md leading-relaxed max-w-lg mx-auto mb-6">
                         Join thousands of developers improving their skills through community feedback. Free, fast, and friendly.
                     </p>
 

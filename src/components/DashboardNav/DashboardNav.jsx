@@ -14,7 +14,7 @@ export default function DashboardNav() {
                 <div className="flex items-center gap-2">
                     <img src={logo} alt="CodeShare logo" width={22} className="invert opacity-90" />
                     <span
-                        className="text-white font-extrabold text-lg tracking-tight"
+                        className="text-white font-extrabold text-xl md:text-2xl tracking-tight"
                         style={{ fontFamily: "'Syne', sans-serif" }}
                     >
                         Code<span className="text-orange-600">Share</span>

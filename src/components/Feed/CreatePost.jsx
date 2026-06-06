@@ -45,7 +45,7 @@ export default function CreatePost() {
                         <input
                             type="text"
                             placeholder="Post title..."
-                            className="w-full border bg-[#0D0D0D]  border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-400"
+                            className="w-full border bg-[#0D0D0D]  border-gray-700 rounded-xl px-4 py-2.5 text-sm md:text-md text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-400"
                             value={title}
                             onChange={(e) => {
                                 setTitle(e.target.value)
@@ -56,7 +56,7 @@ export default function CreatePost() {
                         <textarea
                             rows={5}
                             placeholder="Paste your code here..."
-                            className="w-full resize-none font-mono bg-[#0D0D0D]  border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-400"
+                            className="w-full resize-none font-mono bg-[#0D0D0D]  border border-gray-700 rounded-xl px-4 py-3 text-sm md:text-md text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-orange-400"
                             value={code}
                             onChange={(e) => {
                                 setCode(e.target.value)
@@ -66,7 +66,7 @@ export default function CreatePost() {
                         <div className="flex items-center justify-between">
 
                             {/* Language select */}
-                            <select className="bg-[#0D0D0D]  border border-gray-700 text-gray-400 text-sm rounded-xl px-3 py-2 focus:outline-none focus:ring-1 focus:ring-orange-400"
+                            <select className="bg-[#0D0D0D]  border border-gray-700 text-gray-400 text-sm lmd:text-md rounded-xl px-3 py-2 focus:outline-none focus:ring-1 focus:ring-orange-400"
                                 value={language}
                                 onChange={(e) => setLanguage(e.target.value)}
                             >
@@ -78,7 +78,7 @@ export default function CreatePost() {
                                 <option value="Other" >Other</option>
                             </select>
 
-                            <button onClick={createPost} className="px-6 py-2 bg-orange-600 hover:bg-orange-700 cursor-pointer text-white text-sm font-medium rounded-xl transition active:scale-95">
+                            <button onClick={createPost} className="px-6 py-1.5 md:py-2 bg-orange-600 hover:bg-orange-700 cursor-pointer text-white text-sm md:text-md font-medium rounded-xl transition active:scale-95">
                                 Post
                             </button>
 
