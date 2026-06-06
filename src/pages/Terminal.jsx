@@ -71,9 +71,8 @@ export default function Terminal() {
         <main className="flex-1">
             <PanelGroup direction="horizontal" className="h-[calc(100vh-100px)] overflow-hidden border border-[#333] bg-black">
 
-                {/* Left Sidebar — Languages */}
                 <Panel defaultSize={15} minSize={10} maxSize={20}>
-                    {/* sidebar content */}
+                    
                     <div className="w-full shrink-0 flex flex-col border-r border-[#333]" style={{ background: '#0a0a0a' }}>
                         <div className="px-4 py-3 border-b border-[#333]">
                             <p className="text-[10px] text-[#bebebe] uppercase tracking-widest">Languages</p>
@@ -103,11 +102,10 @@ export default function Terminal() {
                     </div>
                 </Panel>
 
-                {/* Center — Code Editor */}
+                    
                 <PanelResizeHandle className="w-1 bg-[#1c1c1c] hover:bg-orange-400 transition-colors cursor-col-resize" />
 
                 <Panel defaultSize={55} minSize={30}>
-                    {/* editor content */}
 
                     <div className="flex-1 flex flex-col h-full min-w-0 border-r border-[#1c1c1c]">
 
@@ -146,8 +144,6 @@ export default function Terminal() {
                             />
                         </div>
 
-                        {/* Run button */}
-
                     </div>
 
                 </Panel>
@@ -155,9 +151,6 @@ export default function Terminal() {
 
                 {/* Output */}
                 <Panel defaultSize={30} minSize={15}>
-                    {/* output content */}
-
-                    {/* Right — Output */}
                     <div className="w-full h-full shrink-0 flex flex-col" style={{ background: '#0a0a0a' }}>
                         <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#333]">
 
@@ -173,7 +166,7 @@ export default function Terminal() {
                                     {item.type === "input" && (
                                         <div>
                                             <p className="text-orange-500 mb-1.5">▶ {item.language}</p>
-                                            
+
                                         </div>
                                     )}
                                     {item.type === "output" && (
