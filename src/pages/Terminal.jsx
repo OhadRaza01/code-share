@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import CodeMirror from '@uiw/react-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { python } from '@codemirror/lang-python'
@@ -177,13 +175,7 @@ export default function Terminal() {
                                     {item.type === "input" && (
                                         <div>
                                             <p className="text-orange-500 mb-1.5">▶ {item.language}</p>
-                                            <SyntaxHighlighter
-                                                language={item.language?.toLowerCase() === "c++" ? "cpp" : item.language?.toLowerCase()}
-                                                style={oneDark}
-                                                customStyle={{ background: '#111', fontSize: '14px', margin: 0, borderRadius: '6px', padding: '8px', border: '0.5px solid #1c1c1c' }}
-                                            >
-                                                {item.text}
-                                            </SyntaxHighlighter>
+                                            
                                         </div>
                                     )}
                                     {item.type === "output" && (
