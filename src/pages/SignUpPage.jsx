@@ -15,6 +15,7 @@ export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [registerSuccess, setRegisterSuccess] = useState(false)
   const [username, setUsername] = useState("")
+  const [loading, setLoading] = useState(false)
 
   function checkSpecialCharacters(password) {
     const special_chars = ["!", "@", "#", "$", "%", "^", "*", "&"]
@@ -35,12 +36,19 @@ export default function SignUpPage() {
       if (passwordLength < 8 || !specialCharCheck) {
         setError("Password must be 8+ characters with a special character"); return
       }
+      setLoading(true)
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       await sendEmailVerification(userCredential.user)
       await updateProfile(userCredential.user, { displayName: username })
+      setLoading(false)
+      setEmail("")
+      setUsername("")
+      setPassword("")
+      setPasswordLength(0)
       setRegisterSuccess(true)
     } catch (err) {
       setError(err.code === 'auth/email-already-in-use' ? "This email is already registered" : err.message)
+      setLoading(false)
     }
   }
 
@@ -87,6 +95,7 @@ export default function SignUpPage() {
           <label className="font-mono text-[12px] text-gray-400 tracking-wide uppercase">Username</label>
           <input
             type="text"
+            value={username}
             placeholder="your_username"
             className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
             onChange={(e) => { setUsername(e.target.value.trim()); setError("") }}
@@ -98,6 +107,7 @@ export default function SignUpPage() {
           <label className="font-mono text-[12px] text-gray-400 tracking-wide uppercase">Email</label>
           <input
             type="email"
+            value={email}
             placeholder="your@email.com"
             className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
             onChange={(e) => { setEmail(e.target.value.trim()); setError("") }}
@@ -109,6 +119,7 @@ export default function SignUpPage() {
           <label className="font-mono text-[12px] text-gray-500 tracking-wide uppercase">Password</label>
           <input
             type={showPassword ? "text" : "password"}
+            value={password}
             placeholder="••••••••"
             className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
             onChange={(e) => { setPassword(e.target.value); setPasswordLength(e.target.value.length); setError("") }}
@@ -161,12 +172,25 @@ export default function SignUpPage() {
         {/* Submit */}
         <button
           onClick={handleSignUp}
-          className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold tracking-wide transition-all duration-200 hover:shadow-[0_8px_24px_rgba(234,88,12,0.3)] active:scale-[0.98]"
+          className="w-full flex items-center justify-center gap-2 py-3 rounded-md bg-orange-600 hover:bg-orange-700 text-white text-sm font-bold transition-all duration-200 active:scale-[0.98]"
         >
-          Create Account
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10m0 0L8 3m5 5-5 5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+
+          {loading ? (
+            <>
+              <svg className="animate-spin w-3 h-3" viewBox="0 0 24 24" fill="none">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+              </svg>
+              Creating account
+            </>
+          ) :
+            <>
+              <span>Create Account</span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10m0 0L8 3m5 5-5 5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </>
+          }
         </button>
 
         {/* Sign in link */}
