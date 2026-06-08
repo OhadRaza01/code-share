@@ -148,10 +148,6 @@ export default function LoginPage() {
                 </p>
 
             </div>
-
-            <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-      `}</style>
         </div>
     )
 }
