@@ -69,7 +69,7 @@ export default function Terminal() {
 
     return (
         <main className="flex-1">
-            <PanelGroup direction="horizontal" className="h-[calc(100vh-64px)] overflow-hidden border border-[#333] bg-black">
+            <PanelGroup direction="horizontal" className="h-[calc(100vh-64px)] overflow-auto border border-[#333] bg-black">
 
                 <Panel defaultSize={15} minSize={10} maxSize={20}>
                     
