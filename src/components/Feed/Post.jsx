@@ -137,11 +137,11 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
             </div>
 
             {/* Actions */}
-            <div className="px-5 py-3 border-t border-gray-700 flex items-center gap-6">
+            <div className="px-5 py-3 border-t border-gray-700 flex items-center gap-4">
 
                 {/* Upvote */}
                 <button onClick={handleUpvote} className="flex items-center justify-center gap-0.5 text-gray-400 hover:text-green-400 transition text-sm">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
                         <path d="M8 2L2 9h4v5h4V9h4L8 2Z" fill="currentColor" />
                     </svg>
                     <span>{upvotes}</span>
@@ -149,7 +149,7 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
 
                 {/* Downvote */}
                 <button onClick={handleDownvote} className="flex items-center justify-center gap-0.5 text-gray-400 hover:text-red-400 transition text-sm">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
                         <path d="M8 14L2 7h4V2h4v5h4L8 14Z" fill="currentColor" />
                     </svg>
                     <span>{downvotes}</span>
@@ -157,10 +157,8 @@ export default function Post({ upvotedBy, downvotedBy, postId, char, name, time,
 
                 {/* Comments */}
                 <NavLink to={`/dashboard/post/${postId}`} className="flex items-center justify-center gap-0.5 text-gray-400 hover:text-blue-400 transition text-sm">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="text-gray-600">
-                        <path d="M14 1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2v3l3-3h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-                    </svg>
-                    <span>{comments}</span>
+                    
+                    <span>comments({comments})</span>
                 </NavLink>
 
             </div>
