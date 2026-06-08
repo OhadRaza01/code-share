@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
-import { getDocs, collection, onSnapshot } from "firebase/firestore";
+import { getDocs, collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
 
 export default function Feed() {
@@ -10,7 +10,12 @@ export default function Feed() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, "posts"), (snapshot) => {
+    const q = query(
+      collection(db, "posts"),
+      orderBy("createdAt", "desc")
+    );
+
+    const unsub = onSnapshot(q, (snapshot) => {
       const postsArray = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -35,10 +40,10 @@ export default function Feed() {
           <div className="text-gray-400 text-center py-10">Loading posts...</div>
         ) : (
           posts.map((post) => (
-            <Post 
-            upvotedBy = {post.upvotedBy}
-            downvotedBy = {post.downvotedBy}
-            postId={post.id} key={post.id} char={post.username.charAt(0)} name={post.username} time={post.createdAt?.toDate().toLocaleDateString()} language={post.codeLanguage} title={post.title}
+            <Post
+              upvotedBy={post.upvotedBy}
+              downvotedBy={post.downvotedBy}
+              postId={post.id} key={post.id} char={post.username.charAt(0)} name={post.username} time={post.createdAt?.toDate().toLocaleDateString()} language={post.codeLanguage} title={post.title}
               code={post.code} upvotes={post.upvotes} downvotes={post.downvotes} comments={post.comments} />
           ))
         )}
