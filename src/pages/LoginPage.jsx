@@ -18,9 +18,9 @@ export default function LoginPage() {
     async function handleSignIn() {
         try {
             const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            if (!email) { setError("Email is required"); return }
-            if (!regex.test(email)) { setError("Invalid email format"); return }
-            if (!password) { setError("Password is required"); return }
+            if (!email) { setError("Email is required"); setLoading(false); return }
+            if (!regex.test(email)) { setError("Invalid email format"); setLoading(false); return }
+            if (!password) { setError("Password is required"); setLoading(false); return }
 
             setLoading(true)
             const userCredential = await signInWithEmailAndPassword(auth, email, password)
