@@ -132,7 +132,7 @@ export default function PostDetail() {
             {/* Post Card */}
             {loading ? (
                 <div className="flex items-center justify-center py-20">
-                    <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-8 h-8 border-2 border-orange-600 border-t-transparent rounded-full animate-spin" />
                 </div>
             ) : (
                 <Post
@@ -152,22 +152,26 @@ export default function PostDetail() {
             )}
 
             {/* Comments Section */}
-            <div className="bg-[#161b22] border border-[#30363d] rounded-md overflow-hidden">
+            <div className="bg-[#0d0d0d] border border-[#1f1f1f] rounded-md overflow-hidden">
 
                 {/* Header */}
-                <div className="px-5 py-4 border-b border-[#30363d]">
-                    <h2 className="text-white font-semibold flex items-center gap-2">
-                        <span className="text-gray-400">💬</span>
-                        Comments
-                        <span className="ml-1 px-2 py-0.5 bg-[#30363d] text-gray-400 text-xs rounded-full">{comments.length}</span>
-                    </h2>
+                <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#1f1f1f]">
+                    <div className="flex items-center gap-2.5">
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" className="text-gray-600">
+                            <path d="M14 1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2v3l3-3h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/>
+                        </svg>
+                        <span className="text-sm font-medium text-gray-300">Comments</span>
+                        <span className="text-xs text-gray-400 bg-[#1a1a1a] border border-[#2a2a2a] px-2 py-0.5 rounded-full">
+                            {comments.length}
+                        </span>
+                    </div>
                 </div>
 
-                <div className="p-5 space-y-6">
+                <div className="p-5 space-y-5">
 
-                    {/* Add Comment */}
+                    {/* Add Comment Box */}
                     <div className="flex gap-3">
-                        <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold text-white shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-xs font-semibold text-white shrink-0 mt-0.5">
                             {user?.displayName?.charAt(0)?.toUpperCase()}
                         </div>
                         <div className="flex-1 space-y-2">
@@ -175,14 +179,19 @@ export default function PostDetail() {
                                 rows={3}
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
-                                placeholder="Share your thoughts or review..."
-                                className="w-full resize-none bg-[#0d1117] border border-[#30363d] rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                placeholder="Share your thoughts or leave a review..."
+                                className="w-full resize-none bg-black border border-[#1f1f1f] rounded-lg px-4 py-3 text-sm text-gray-300 placeholder-gray-700 focus:outline-none focus:border-orange-600/40 transition-colors"
                             />
                             <div className="flex justify-end">
                                 <button
                                     onClick={addComment}
                                     disabled={!comment.trim()}
-                                    className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 disabled:bg-[#30363d] disabled:text-gray-500 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
+                                    className="px-4 py-1.5 text-xs font-semibold rounded-lg transition-all duration-200 active:scale-[.97] disabled:cursor-not-allowed"
+                                    style={{
+                                        background: comment.trim() ? "#ea580c" : "#1a1a1a",
+                                        color: comment.trim() ? "#fff" : "#4b5563",
+                                        border: "none"
+                                    }}
                                 >
                                     Comment
                                 </button>
@@ -191,12 +200,12 @@ export default function PostDetail() {
                     </div>
 
                     {/* Divider */}
-                    {comments.length > 0 && <div className="border-t border-[#30363d]" />}
+                    {comments.length > 0 && <div className="border-t border-[#1a1a1a]" />}
 
-                    {/* Comments List */}
+                    {/* Empty state */}
                     {comments.length === 0 ? (
                         <div className="text-center py-8">
-                            <p className="text-gray-500 text-sm">No comments yet — be the first!</p>
+                            <p className="text-gray-600 text-sm">No comments yet — be the first!</p>
                         </div>
                     ) : (
                         <div className="space-y-5">
@@ -204,18 +213,18 @@ export default function PostDetail() {
                                 <div key={c.id} className="flex gap-3">
 
                                     {/* Avatar */}
-                                    <div className="w-8 h-8 rounded-full bg-green-700 flex items-center justify-center text-xs font-bold text-white shrink-0 mt-0.5">
+                                    <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-xs font-semibold text-white shrink-0 mt-0.5">
                                         {c.username?.charAt(0)?.toUpperCase()}
                                     </div>
 
-                                    {/* Comment Body */}
+                                    {/* Body */}
                                     <div className="flex-1 min-w-0">
 
-                                        {/* Meta */}
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <span className="text-white text-sm font-medium">{c.username}</span>
-                                            <span className="text-gray-600 text-xs">·</span>
-                                            <span className="text-gray-500 text-xs">
+                                        {/* Meta row */}
+                                        <div className="flex items-center gap-2 mb-1.5">
+                                            <span className="text-sm font-medium text-gray-200">{c.username}</span>
+                                            <span className="text-gray-700">·</span>
+                                            <span className="text-xs text-gray-700 font-mono">
                                                 {c.createdAt?.toDate().toLocaleDateString(undefined, {
                                                     month: 'short', day: 'numeric', year: 'numeric'
                                                 })}
@@ -223,25 +232,31 @@ export default function PostDetail() {
                                         </div>
 
                                         {/* Text */}
-                                        <p className="text-gray-300 text-sm leading-relaxed mb-2">{c.text}</p>
+                                        <p className="text-sm text-gray-300 leading-relaxed mb-2.5">{c.text}</p>
 
                                         {/* Actions */}
                                         <div className="flex items-center gap-4">
                                             <button
                                                 onClick={() => handleCommentUpvote(c.id, c.upvotedBy, c.downvotedBy)}
-                                                className={`flex items-center gap-1 text-xs transition-colors ${c.upvotedBy?.includes(user.uid) ? 'text-green-400' : 'text-gray-500 hover:text-green-400'}`}
+                                                className={`flex items-center gap-1.5 text-xs transition-colors ${c.upvotedBy?.includes(user.uid) ? 'text-orange-500' : 'text-gray-600 hover:text-orange-500'}`}
                                             >
-                                                ▲ <span>{c.upvotes || 0}</span>
+                                                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M8 2L2 9h4v5h4V9h4L8 2Z" fill="currentColor"/>
+                                                </svg>
+                                                {c.upvotes || 0}
                                             </button>
                                             <button
                                                 onClick={() => handleCommentDownvote(c.id, c.upvotedBy, c.downvotedBy)}
-                                                className={`flex items-center gap-1 text-xs transition-colors ${c.downvotedBy?.includes(user.uid) ? 'text-red-400' : 'text-gray-500 hover:text-red-400'}`}
+                                                className={`flex items-center gap-1.5 text-xs transition-colors ${c.downvotedBy?.includes(user.uid) ? 'text-red-500' : 'text-gray-600 hover:text-red-500'}`}
                                             >
-                                                ▼ <span>{c.downvotes || 0}</span>
+                                                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M8 14L2 7h4V2h4v5h4L8 14Z" fill="currentColor"/>
+                                                </svg>
+                                                {c.downvotes || 0}
                                             </button>
                                             <button
                                                 onClick={() => toggleReply(c.id)}
-                                                className="text-xs text-gray-500 hover:text-blue-400 transition-colors"
+                                                className="text-xs text-gray-600 hover:text-gray-400 transition-colors"
                                             >
                                                 {showReply[c.id] ? 'Cancel' : 'Reply'}
                                             </button>
@@ -250,7 +265,7 @@ export default function PostDetail() {
                                         {/* Reply Input */}
                                         {showReply[c.id] && (
                                             <div className="flex gap-2 mt-3">
-                                                <div className="w-7 h-7 rounded-full bg-blue-600 flex items-center justify-center text-xs font-bold text-white shrink-0 mt-0.5">
+                                                <div className="w-7 h-7 rounded-full bg-orange-200  flex items-center justify-center text-xs font-semibold text-gray-700 shrink-0 mt-0.5">
                                                     {user?.displayName?.charAt(0)?.toUpperCase()}
                                                 </div>
                                                 <div className="flex-1 space-y-2">
@@ -259,13 +274,18 @@ export default function PostDetail() {
                                                         value={replyText[c.id] || ""}
                                                         onChange={(e) => setReplyText(prev => ({ ...prev, [c.id]: e.target.value }))}
                                                         placeholder={`Reply to ${c.username}...`}
-                                                        className="w-full resize-none bg-[#0d1117] border border-[#30363d] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 transition-colors"
+                                                        className="w-full resize-none bg-black border border-[#1f1f1f] rounded-lg px-3 py-2 text-sm text-gray-300 placeholder-gray-700 focus:outline-none focus:border-orange-600/40 transition-colors"
                                                     />
                                                     <div className="flex justify-end">
                                                         <button
                                                             onClick={() => addReply(c.id)}
                                                             disabled={!replyText[c.id]?.trim()}
-                                                            className="px-3 py-1 bg-blue-600 hover:bg-blue-700 disabled:bg-[#30363d] disabled:text-gray-500 disabled:cursor-not-allowed text-white text-xs font-medium rounded-md transition-colors"
+                                                            className="px-3 py-1.5 text-xs font-semibold rounded-lg transition-all active:scale-[.97] disabled:cursor-not-allowed"
+                                                            style={{
+                                                                background: replyText[c.id]?.trim() ? "#ea580c" : "#1a1a1a",
+                                                                color: replyText[c.id]?.trim() ? "#fff" : "#4b5563",
+                                                                border: "none"
+                                                            }}
                                                         >
                                                             Reply
                                                         </button>
@@ -276,23 +296,23 @@ export default function PostDetail() {
 
                                         {/* Replies */}
                                         {replies[c.id]?.length > 0 && (
-                                            <div className="mt-3 pl-3 border-l-2 border-[#30363d] space-y-3">
+                                            <div className="mt-4 pl-4 border-l border-[#1f1f1f] space-y-4">
                                                 {replies[c.id].map((reply) => (
                                                     <div key={reply.id} className="flex gap-2">
-                                                        <div className="w-7 h-7 rounded-full bg-purple-700 flex items-center justify-center text-xs font-bold text-white shrink-0 mt-0.5">
+                                                        <div className="w-7 h-7 rounded-full bg-orange-200 flex items-center justify-center text-xs font-semibold text-gray-700 shrink-0 mt-0.5">
                                                             {reply.username?.charAt(0)?.toUpperCase()}
                                                         </div>
                                                         <div className="flex-1">
                                                             <div className="flex items-center gap-2 mb-1">
-                                                                <span className="text-white text-xs font-medium">{reply.username}</span>
-                                                                <span className="text-gray-600 text-xs">·</span>
-                                                                <span className="text-gray-500 text-xs">
+                                                                <span className="text-xs font-medium text-gray-300">{reply.username}</span>
+                                                                <span className="text-gray-700">·</span>
+                                                                <span className="text-xs text-gray-700 font-mono">
                                                                     {reply.createdAt?.toDate().toLocaleDateString(undefined, {
                                                                         month: 'short', day: 'numeric'
                                                                     })}
                                                                 </span>
                                                             </div>
-                                                            <p className="text-gray-400 text-xs leading-relaxed">{reply.text}</p>
+                                                            <p className="text-xs text-gray-300 leading-relaxed">{reply.text}</p>
                                                         </div>
                                                     </div>
                                                 ))}

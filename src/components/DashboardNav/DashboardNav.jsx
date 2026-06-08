@@ -1,11 +1,17 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logo from "../../assets/logo.png"
 import logout from "../../assets/logout.png"
 import { useAuth } from '../Context/AuthContext'
+import LogoutAlert from './LogoutAlert'
+import { auth } from '../../firebase'
+import { signOut } from 'firebase/auth'
 
 export default function DashboardNav() {
 
+    const [showLogout, setShowLogout] = useState(false);
+
+    const navigate = useNavigate()
     const { user } = useAuth()
 
     return (
@@ -27,7 +33,7 @@ export default function DashboardNav() {
 
                     <input type="text"
                         placeholder='Search'
-                        className='pl-2 pr-2 pt-0.5 pb-0.5 bg-[#000] rounded-md'
+                        className='pl-2 pr-2 pt-0.5 pb-0.5 bg-black  rounded-md'
                     />
 
                     <NavLink to="/dashboard/profile">
@@ -38,13 +44,25 @@ export default function DashboardNav() {
                     </NavLink>
 
 
-                    <a href="/"
+                    <button
+                        onClick={()=>setShowLogout(true)}
                         className='p-2  rounded-md cursor-pointer hover:bg-gray-800 font-medium transition-all active:scale-95 -ml-3'>
                         <img src={logout}
                             alt=" logout icon"
                             width={18}
                         />
-                    </a>
+
+                    </button>
+                    {showLogout && (
+                        <LogoutAlert
+                            onCancel={() => setShowLogout(false)}
+                            onConfirm={() => {
+                                signOut(auth)
+                                setShowLogout(false)
+                                navigate("/")
+                            }}
+                        />
+                    )}
 
                 </div>
             </nav>

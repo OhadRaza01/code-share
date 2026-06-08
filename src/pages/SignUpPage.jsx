@@ -55,20 +55,6 @@ export default function SignUpPage() {
   return (
     <div className="relative min-h-screen bg-black text-white flex justify-center items-center px-4 overflow-hidden">
 
-      {/* Noise */}
-      <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundSize: "200px 200px",
-        }}
-      />
-
-      {/* Glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at center, rgba(234,88,12,0.08) 0%, transparent 65%)" }}
-      />
 
       {registerSuccess && (
         <EmailVerificationAlert message="Registration successful! We have sent a verification link to your email. Please check your inbox and verify your email before logging in." />
@@ -87,41 +73,41 @@ export default function SignUpPage() {
           >
             Create an Account
           </h1>
-          <p className="font-mono text-[12px] text-gray-400">Join and start sharing code</p>
+          <p className="text-[12px] text-gray-400">Join and start sharing code</p>
         </div>
 
         {/* Username */}
         <div className="space-y-1.5">
-          <label className="font-mono text-[12px] text-gray-400 tracking-wide uppercase">Username</label>
+          <label className="text-[12px] text-gray-400 tracking-wide uppercase">Username</label>
           <input
             type="text"
             value={username}
             placeholder="your_username"
-            className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
+            className="w-full bg-black border border-[#1f1f1f] text-white text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
             onChange={(e) => { setUsername(e.target.value.trim()); setError("") }}
           />
         </div>
 
         {/* Email */}
         <div className="space-y-1.5">
-          <label className="font-mono text-[12px] text-gray-400 tracking-wide uppercase">Email</label>
+          <label className="text-[12px] text-gray-400 tracking-wide uppercase">Email</label>
           <input
             type="email"
             value={email}
-            placeholder="your@email.com"
-            className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
+            placeholder="Enter your email"
+            className="w-full bg-black border border-[#1f1f1f] text-white text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
             onChange={(e) => { setEmail(e.target.value.trim()); setError("") }}
           />
         </div>
 
         {/* Password */}
         <div className="space-y-1.5">
-          <label className="font-mono text-[12px] text-gray-500 tracking-wide uppercase">Password</label>
+          <label className="text-[12px] text-gray-500 tracking-wide uppercase">Password</label>
           <input
             type={showPassword ? "text" : "password"}
             value={password}
             placeholder="••••••••"
-            className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
+            className="w-full bg-black border border-[#1f1f1f] text-white text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
             onChange={(e) => { setPassword(e.target.value); setPasswordLength(e.target.value.length); setError("") }}
           />
           <label className="flex items-center gap-2 cursor-pointer w-fit">
@@ -130,7 +116,7 @@ export default function SignUpPage() {
               className="accent-orange-600 w-3.5 h-3.5 cursor-pointer"
               onChange={() => setShowPassword(!showPassword)}
             />
-            <span className="font-mono text-[11px] text-gray-400">Show password</span>
+            <span className="text-[11px] text-gray-400">Show password</span>
           </label>
         </div>
 
@@ -144,7 +130,7 @@ export default function SignUpPage() {
                 </svg>
               )}
             </span>
-            <span className={`font-mono text-[11px] transition-colors duration-200 ${passwordLength >= 8 ? "text-orange-500" : "text-gray-500"}`}>
+            <span className={` text-[11px] transition-colors duration-200 ${passwordLength >= 8 ? "text-orange-500" : "text-gray-500"}`}>
               At least 8 characters
             </span>
           </div>
@@ -156,7 +142,7 @@ export default function SignUpPage() {
                 </svg>
               )}
             </span>
-            <span className={`font-mono text-[11px] transition-colors duration-200 ${specialCharCheck ? "text-orange-500" : "text-gray-500"}`}>
+            <span className={`text-[11px] transition-colors duration-200 ${specialCharCheck ? "text-orange-500" : "text-gray-500"}`}>
               One special character
             </span>
           </div>
@@ -184,17 +170,12 @@ export default function SignUpPage() {
               Creating account
             </>
           ) :
-            <>
-              <span>Create Account</span>
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10m0 0L8 3m5 5-5 5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </>
+            <span>Create Account</span>
           }
         </button>
 
         {/* Sign in link */}
-        <p className="text-center font-mono text-[12px] text-gray-400">
+        <p className="text-center text-[12px] text-gray-400">
           Already have an account?{" "}
           <Link to="/login" className="text-orange-500 hover:text-orange-400 transition-colors duration-200">
             Sign in

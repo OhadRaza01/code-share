@@ -75,27 +75,27 @@ export default function LoginPage() {
                     >
                         Welcome Back
                     </h1>
-                    <p className="font-mono text-[12px] text-gray-400">Sign in to your account</p>
+                    <p className="text-[12px] text-gray-400">Sign in to your account</p>
                 </div>
 
                 {/* Email */}
                 <div className="space-y-1.5">
-                    <label className="font-mono text-[12px] text-gray-400 tracking-wide uppercase">Email</label>
+                    <label className="text-[12px] text-gray-400 tracking-wide uppercase">Email</label>
                     <input
                         type="email"
-                        placeholder="your@email.com"
-                        className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
+                        placeholder="Enter your email"
+                        className="w-full bg-black border border-[#1f1f1f] text-white text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
                         onChange={(e) => { setEmail(e.target.value.trim()); setError("") }}
                     />
                 </div>
 
                 {/* Password */}
                 <div className="space-y-1.5">
-                    <label className="font-mono text-[12px] text-gray-400 tracking-wide uppercase">Password</label>
+                    <label className="text-[12px] text-gray-400 tracking-wide uppercase">Password</label>
                     <input
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
-                        className="w-full bg-black border border-[#1f1f1f] text-white font-mono text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
+                        className="w-full bg-black border border-[#1f1f1f] text-white text-sm px-4 py-2.5 rounded-lg focus:outline-none focus:border-orange-600/50 focus:ring-1 focus:ring-orange-600/20 transition-all placeholder:text-gray-700"
                         onChange={(e) => { setPassword(e.target.value); setError("") }}
                     />
                     <label className="flex items-center gap-2 cursor-pointer w-fit">
@@ -104,7 +104,7 @@ export default function LoginPage() {
                             className="accent-orange-600 w-3.5 h-3.5 cursor-pointer"
                             onChange={() => setShowPassword(!showPassword)}
                         />
-                        <span className="font-mono text-[11px] text-gray-400">Show password</span>
+                        <span className=" text-[11px] text-gray-400">Show password</span>
                     </label>
                 </div>
 
@@ -129,18 +129,15 @@ export default function LoginPage() {
                             Signing in
                         </>
                     ) :
-                        <>
-                            <span>Sign In</span>
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8h10m0 0L8 3m5 5-5 5" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </>
+                        <span>Sign In</span>
+
+
                     }
 
                 </button>
 
                 {/* Sign up link */}
-                <p className="text-center font-mono text-[12px] text-gray-400">
+                <p className="text-center text-[12px] text-gray-400">
                     Don't have an account?{" "}
                     <Link to="/signup" className="text-orange-500 hover:text-orange-400 transition-colors duration-200">
                         Sign up
