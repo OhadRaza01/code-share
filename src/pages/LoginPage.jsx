@@ -71,7 +71,7 @@ export default function LoginPage() {
             />
 
             {emailNotVerified && (
-                <EmailVerificationAlert message="Access denied. Your email is not verified yet. Please check your inbox (and spam folder) for the verification link before logging in." />
+                <EmailVerificationAlert onCancel = {()=>setEmailNotVerified(false)} message="Access denied. Your email is not verified yet. Please check your inbox (and spam folder) for the verification link before logging in." />
             )}
 
             {/* Card */}
