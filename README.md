@@ -1,16 +1,53 @@
-# React + Vite
+# CodeShare 🪺
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A developer platform to share code snippets, get community reviews, and upvote the best solutions.
 
-Currently, two official plugins are available:
+🔗 **Live:** [codeshare-dev.vercel.app](https://codeshare-dev.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Code Sharing** — Post code snippets with syntax highlighting
+- **Community Reviews** — Comment and reply on posts
+- **Voting System** — Upvote and downvote posts and comments
+- **Built-in Terminal** — Write and execute code directly in the browser (JavaScript, Python, Java, C++)
+- **Authentication** — Secure signup and login with email verification
+- **User Profiles** — Customize your profile with bio, location, and website
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+| Frontend | Backend | Tools |
+|----------|---------|-------|
+| React | Firebase Auth | Vite |
+| Tailwind CSS | Firestore | Vercel |
+| React Router | Judge0 API | Git |
+| CodeMirror | | |
+
+---
+
+## Getting Started
+
+```bash
+git clone https://github.com/OhadRaza01/code-share
+cd code-share
+npm install
+npm run dev
+```
+
+Add your Firebase config in `.env`:
+VITE_API_KEY=your_key
+VITE_AUTH_DOMAIN=your_domain
+VITE_PROJECT_ID=your_project_id
+VITE_STORAGE_BUCKET=your_bucket
+VITE_MESSAGING_SENDER_ID=your_sender_id
+VITE_APP_ID=your_app_id
+
+---
+
+## Author
+
+**Ohad Raza** — Software Engineering Student, Karachi  
+[Portfolio](https://ohadraza.vercel.app) · [GitHub](https://github.com/OhadRaza01)
