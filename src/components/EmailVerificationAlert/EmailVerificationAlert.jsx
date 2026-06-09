@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function EmailVerificationAlert({ message }) {
+export default function EmailVerificationAlert({onCancel, message }) {
 
     const [visible, setVisible] = useState(true);
     const [show, setShow] = useState(false);
@@ -12,6 +12,7 @@ export default function EmailVerificationAlert({ message }) {
     function handleClose() {
         setShow(false)
         setTimeout(() => setVisible(false), 300)
+        onCancel()
     }
 
     if (!visible) return null;

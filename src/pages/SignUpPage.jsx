@@ -57,7 +57,7 @@ export default function SignUpPage() {
 
 
       {registerSuccess && (
-        <EmailVerificationAlert message="Registration successful! We have sent a verification link to your email. Please check your inbox and verify your email before logging in." />
+        <EmailVerificationAlert onCancel = {()=>{setRegisterSuccess(false)}} message="Registration successful! We have sent a verification link to your email. Please check your inbox and verify your email before logging in." />
       )}
 
       {/* Card */}
