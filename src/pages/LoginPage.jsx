@@ -18,9 +18,9 @@ export default function LoginPage() {
     async function handleSignIn() {
         try {
             const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            if (!email) { setError("Email is required"); setLoading(false); return }
-            if (!regex.test(email)) { setError("Invalid email format"); setLoading(false); return }
-            if (!password) { setError("Password is required"); setLoading(false); return }
+            if (!email) { setError("Email is required"); return }
+            if (!regex.test(email)) { setError("Invalid email format"); return }
+            if (!password) { setError("Password is required"); return }
 
             setLoading(true)
             const userCredential = await signInWithEmailAndPassword(auth, email, password)
@@ -33,10 +33,22 @@ export default function LoginPage() {
                 await sendEmailVerification(userCredential.user)
             }
         } catch (err) {
-            if (err.code === 'auth/invalid-credential') setError("Invalid email or password.")
-            else if (err.code === 'auth/missing-password') setError("Password is missing.")
-            else if (err.code === 'auth/network-request-failed') setError("Please check your connection.")
-            else setError(err.message)
+            if (err.code === 'auth/invalid-credential') {
+                setError("Invalid email or password.")
+                setLoading(false)
+            }
+            else if (err.code === 'auth/missing-password') {
+                setError("Password is missing.")
+                setLoading(false)
+            }
+            else if (err.code === 'auth/network-request-failed') {
+                setError("Please check your connection.")
+                setLoading(false)
+            }
+            else{
+                setError(err.message)
+                setLoading(false)
+            } 
         }
     }
 
