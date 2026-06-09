@@ -1,5 +1,4 @@
 import React from "react";
-import FeatureNumber from "./FeatureNumber";
 
 export default function ReviewCodeFeature() {
   return (
@@ -28,7 +27,7 @@ export default function ReviewCodeFeature() {
         {/* Left — Feature number + Review card */}
         <div className="flex flex-col gap-6">
 
-          <FeatureNumber number={2} />
+
 
           {/* Review Card */}
           <div className="w-full bg-[#111] border border-[#1f1f1f] rounded-md p-5 hover:border-orange-600/20 hover:shadow-[0_0_40px_rgba(234,88,12,0.06)] transition-all duration-300">

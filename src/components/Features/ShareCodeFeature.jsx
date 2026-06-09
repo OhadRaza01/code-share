@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FeatureNumber from "./FeatureNumber";
 
 export default function ShareCodeFeature() {
   return (
@@ -28,7 +27,6 @@ export default function ShareCodeFeature() {
         {/* Left */}
         <div className="flex flex-col gap-6">
 
-          <FeatureNumber number={1} />
 
           <div className="flex flex-col gap-4">
             <h2
@@ -38,7 +36,7 @@ export default function ShareCodeFeature() {
               <span className="text-orange-600">Instantly</span>
             </h2>
 
-            <p className="text-gray-400 font-mono text-xs md:text-sm lg:text-md leading-relaxed">
+            <p className="text-gray-500 font-mono text-xs md:text-sm lg:text-md leading-relaxed">
               Post snippets with syntax highlighting. Share your solutions, experiments, and projects with the community.
             </p>
 
