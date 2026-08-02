@@ -2,8 +2,6 @@
 
 A developer platform to share code snippets, get community reviews, and upvote the best solutions.
 
-🔗 **Live:** [codeshare-dev.vercel.app](https://codeshare-dev.vercel.app)
-
 ---
 
 ## Features
